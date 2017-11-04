@@ -26,6 +26,6 @@ const User = db.define('user', {
     gender: {
         type: Sequelize.STRING
     }
-})
+});
 
 module.exports = User;

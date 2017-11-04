@@ -8,6 +8,6 @@ const Promo = db.define('promo', {
     expiration: {
         type: Sequelize.DATE
     }
-})
+});
 
 module.exports = Promo;

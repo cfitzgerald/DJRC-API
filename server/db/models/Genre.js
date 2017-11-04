@@ -8,6 +8,6 @@ const Genre = db.define('genre', {
     photo: {
         type: Sequelize.STRING
     }
-})
+});
 
 module.exports = Genre;

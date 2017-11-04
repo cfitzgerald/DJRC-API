@@ -20,6 +20,6 @@ const Venue = db.define('venue', {
     photo: {
         type: Sequelize.STRING
     }
-})
+});
 
 module.exports = Venue;
