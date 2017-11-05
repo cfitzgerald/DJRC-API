@@ -14,8 +14,8 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Navbar />
+      <div className="container-fluid">
+
         <Switch>
           <Route path="/" component={Landing} />
           <Redirect to="/" />

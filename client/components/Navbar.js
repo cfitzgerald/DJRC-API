@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 const Navbar = (props) => {
 
   return (
-    <div className="container">
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div className="container-fluid center-text">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <a className="navbar-brand" href="#">BarCast</a>

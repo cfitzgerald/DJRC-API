@@ -1,6 +1,24 @@
 body {
-  color: #e65000;
-  background-color: #eee;
+  color: #e66800;
+  background-color: #fff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  padding-top: 70px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1#landing-title {
+  font-weight: 700;
+}
+
+p#landing-lead {
+  color: #a9a9a9;
   font-family: 'Zilla Slab', serif;
   font-weight: 400;
 }
+/*.shadow-text {
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  text-shadow: .5px 1px 2px #ccc;
+}*/
