@@ -19,6 +19,12 @@ const Venue = db.define('venue', {
     },
     photo: {
         type: Sequelize.STRING
+    },
+    lat: {
+        type: Sequelize.FLOAT
+    },
+    lon: {
+        type: Sequelize.FLOAT
     }
 });
 
