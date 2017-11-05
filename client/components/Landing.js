@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { logoutUser } from '../store';
+
+// components
 import SignupForm from './SignupForm';
 
 const Landing = (props) => {
