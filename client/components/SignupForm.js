@@ -39,7 +39,10 @@ class SignupForm extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div id="signup-form-container" className="col-md-12">
+
+          <p id="signup-lead" className="text-center">Create a free account!</p>
+
           <form id="signup-form" className="card" onSubmit={onSubmit}>
 
             <div className="form-row">
@@ -94,7 +97,14 @@ class SignupForm extends Component {
               </div>
             </div>
 
-            <button name="signup" className="btn btn-outline-info btn-md">Create account</button>
+            <div className="form-row">
+              <div className="form-group col-md-12 text-center">
+                <button
+                  className="btn btn-outline-primary btn-md text-center"
+                  id="signup-button"
+                  name="signup">Create account</button>
+              </div>
+            </div>
 
           </form>
         </div>

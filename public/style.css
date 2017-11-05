@@ -14,6 +14,20 @@ h1#landing-title {
 p#landing-lead {
   color: #777;
   font-family: 'Zilla Slab', serif;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+#signup-form-container {
+  border-top: 1px dashed #ddd;
+  padding-top: 20px;
+  margin-top: 10px;
+}
+
+p#signup-lead {
+  color: #777;
+  font-family: 'Zilla Slab', serif;
+  font-size: 1.25em;
   font-weight: 400;
 }
 
@@ -23,10 +37,3 @@ p#landing-lead {
   font-family: 'Zilla Slab', serif;
   font-weight: 400;
 }
-
-/*.shadow-text {
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-  text-shadow: .5px 1px 2px #ccc;
-}*/
