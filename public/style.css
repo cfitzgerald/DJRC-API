@@ -1,3 +1,6 @@
 body {
+  color: #e65000;
   background-color: #eee;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 400;
 }
