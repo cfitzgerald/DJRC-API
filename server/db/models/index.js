@@ -10,4 +10,4 @@ Genre.belongsToMany(Venue, { through: 'genreVenue' });
 Venue.belongsToMany(User, { through: 'favorite' });
 User.belongsToMany(Venue, { through: 'favorite' });
 
-module.exports = db;
+module.exports = {db, Genre, User, Venue, Promo};
