@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { logoutUser } from '../redux';
+// import { logoutUser } from '../store';
 
-
-function Navbar(props) {
+const Navbar = (props) => {
 
   return (
     <div className="container">
@@ -26,7 +25,7 @@ function Navbar(props) {
       </nav>
     </div>
   );
-}
+};
 
 const mapStateToProps = () => {
   return {
