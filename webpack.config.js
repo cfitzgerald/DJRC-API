@@ -1,26 +1,19 @@
-'use strict';
-
-const { resolve } = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './client/index.js',
   output: {
-    path: __dirname,
-    filename: './dist/bundle.js'
-  },
-  context: __dirname,
-  devtool: 'source-map',
-  resolve: {
-    extensions: ['.js', '.jsx']
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
-        test: /jsx?$/,
-        include: resolve(__dirname, './client'),
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-2']
+          presets: [ 'es2015', 'react', 'stage-2' ]
         }
       }
     ]
