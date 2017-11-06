@@ -1,0 +1,39 @@
+body {
+  color: #e66800;
+  background-color: #fafafa;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  padding-top: 70px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1#landing-title {
+  font-weight: 700;
+}
+
+p#landing-lead {
+  color: #777;
+  font-family: 'Zilla Slab', serif;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+#signup-form-container {
+  border-top: 1px dashed #ddd;
+  padding-top: 20px;
+  margin-top: 10px;
+}
+
+p#signup-lead {
+  color: #777;
+  font-family: 'Zilla Slab', serif;
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+#signup-form {
+  background-color: inherit;
+  border: none;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 400;
+}
