@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // components
 import SignupForm from './SignupForm';
 
-const Landing = (props) => {
+const Landing = () => {
 
   return (
     <div id="landing-container" className="container">

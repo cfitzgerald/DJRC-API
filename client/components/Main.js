@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // components
 import Landing from './Landing';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 
 class Main extends Component {
 
