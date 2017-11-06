@@ -9,7 +9,7 @@ import Navbar from './Navbar';
 class Main extends Component {
 
   componentDidMount() {
-    console.log('componentDidMount: Main');
+    // console.log('componentDidMount: Main');
   }
 
   render() {

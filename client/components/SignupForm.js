@@ -23,13 +23,12 @@ class SignupForm extends Component {
 
   onSubmit(event){
     event.preventDefault();
-    const { location, cart } = this.props;
-    const { email, password } = this.state;
-    this.setState({name: '', email: '', password: ''});
+    const { email, firstName, lastName, password } = this.state;
+    this.setState({  email: '', firstName: '', lastName: '', password: '' });
   }
 
   componentDidMount(){
-    console.log("componentDidMount: SignupForm");
+    // console.log("componentDidMount: SignupForm");
   }
 
   render() {
