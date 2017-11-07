@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const db = require('./db/models/').db;
+const sync = require('./db/models/').sync;
 const port = 3002;
 
 const bodyParser = require('body-parser');
@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
     res.send(err);
 });
 
-db.sync()
+sync()
   .then(() => {
       console.log('synced');
       app.listen(port, () => {
