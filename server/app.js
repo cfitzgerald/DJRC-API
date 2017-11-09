@@ -7,7 +7,11 @@ const port = process.env.PORT || 3002;
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-app.use(session({ secret: 'haha yes' }));
+app.use(session({
+  secret: 'haha yes',
+  resave: false,
+  saveUninitialized: false, // https://github.com/expressjs/session#options
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
