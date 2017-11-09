@@ -2,7 +2,13 @@ const db = require('./db');
 const Sequelize = db.Sequelize;
 const bcrypt = require('bcrypt');
 
-function saltPassword(user){
+const createError = (message) => {
+  const error = new Error(message);
+  error.status = 401;
+  return error;
+};
+
+const saltPassword = (user) => {
   return bcrypt.genSalt(10)
   .then(salt => {
     return bcrypt.hash(user.password, salt);
@@ -11,11 +17,17 @@ function saltPassword(user){
     user.password = hash;
   })
   .catch(err => console.log(err));
-}
+};
 
 const User = db.define('user', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'Please provide a name.'
+      }
+    }
   },
   address: {
     type: Sequelize.STRING
@@ -68,7 +80,7 @@ const User = db.define('user', {
   }
 });
 
-User.findBySessionId = function(id){
+User.findBySessionId = function(id) {
   // if (!id){
   //   throw createError('No user found');
   // }
@@ -85,7 +97,7 @@ User.prototype.validatePassword = function(password) {
   });
 };
 
-User.prototype.checkNewPasswords = function(newPassword, newPasswordCheck){
+User.prototype.checkNewPasswords = function(newPassword, newPasswordCheck) {
   if (newPassword === newPasswordCheck) {
     this.password = newPassword;
     this.passwordExpired = false;
@@ -97,7 +109,7 @@ User.prototype.checkNewPasswords = function(newPassword, newPasswordCheck){
   }
 };
 
-User.login = function(credentials){
+User.login = function(credentials) {
   const { email, password } = credentials;
   if (!email || !password){
     throw createError('Please complete all fields.');
@@ -107,7 +119,7 @@ User.login = function(credentials){
       email
     }
   })
-  .then( user => {
+  .then(user => {
     return user.validatePassword(password);
   })
   .catch(err => console.log(err));
