@@ -90,7 +90,7 @@ User.findBySessionId = function(id) {
 User.prototype.validatePassword = function(password) {
   return bcrypt.compare(password, this.password)
   .then(res => {
-    if (!res){
+    if (!res) {
       throw createError('Invalid credentials!');
     }
     return this;
@@ -111,7 +111,7 @@ User.prototype.checkNewPasswords = function(newPassword, newPasswordCheck) {
 
 User.login = function(credentials) {
   const { email, password } = credentials;
-  if (!email || !password){
+  if (!email || !password) {
     throw createError('Please complete all fields.');
   }
   return User.findOne({
