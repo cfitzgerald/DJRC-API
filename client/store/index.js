@@ -6,7 +6,7 @@ import authUser from './auth';
 import error from './error';
 // import genres from './genres';
 // import promos from './promos';
-// import users from './users';
+import users from './users';
 // import venues from './users';
 
 const rootReducer = combineReducers({
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   error,
   // genres,
   // promos,
-  // users,
+  users,
   // venues,
 });
 
