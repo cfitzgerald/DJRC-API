@@ -5,14 +5,22 @@ const passport = require('passport');
 
 const { User } = db.models;
 
+router.get('/', (req, res, next)=>{
+    res.send('sdafsd')
+})
+
 router.post('/signup', (req, res, next) => {
+    
     User.create({
         email: req.body.email,
         password: req.body.password
     })
         .then(user => {
+
             return res.status(200).send({ user: user.id })
-        }).catch(next)
+        }).catch(err => {
+            console.log(err);
+        })
 })
 
 router.post('/login', (req, res, next) => {
@@ -23,7 +31,8 @@ router.post('/login', (req, res, next) => {
             return;
         }
         if (user) {
-            const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET)
+            console.log(user.id);
+            const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
             res.status(200).json({ token });
         }
     })(req, res, next);

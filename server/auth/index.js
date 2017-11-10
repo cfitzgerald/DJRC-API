@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const { User } = db.models;
 
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
     secretOrKey: process.env.JWT_SECRET
 }
 
@@ -27,8 +27,6 @@ passport.use(new LocalStrategy({
                 if (!user) {
                     done(null, false);
                 }
-                // return done(null, user);
-
                 if (user) {
                     bcrypt.compare(password, user.password)
                         .then(res => {
@@ -46,8 +44,8 @@ passport.use(new LocalStrategy({
     }
 ));
 
-passport.use(new JwtStrategy(jwtOptions, function (payload, done) {
-    console.log('asdfsad');
+passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
+    console.log('asdfads');
     User.findById(payload.id)
         .then(user => {
             if (user) {
@@ -62,8 +60,8 @@ passport.use(new JwtStrategy(jwtOptions, function (payload, done) {
 }));
 
 router.get('/protected', function (req, res, next) {
-    passport.authenticate('jwt', (err, user) => {
-
+    passport.authenticate('jwt', { session: false }, function (err, user, info) {
+        console.log(info);
         if (err) {
             return next(err);
         }
@@ -71,6 +69,7 @@ router.get('/protected', function (req, res, next) {
             return res.status(401).json({ error: 'Invalid credentials.' });
         }
         if (user) {
+
             return res
                 .status(200)
                 .json({ secret: '123' });
