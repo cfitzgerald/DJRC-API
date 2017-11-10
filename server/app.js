@@ -4,6 +4,7 @@ const app = express();
 const sync = require('./db/models/').sync;
 const port = process.env.PORT || 3002;
 const bodyParser = require('body-parser');
+<<<<<<< HEAD
 const passport = require('passport');
 const passportJwt = require('passport-jwt');
 
@@ -19,6 +20,14 @@ const jwtOptions = {
 
 passport.use(new passportJwt.Strategy(jwtOptions, (payLoad, done) => {
     
+=======
+const session = require('express-session');
+
+app.use(session({
+  secret: 'haha yes',
+  resave: false,
+  saveUninitialized: false, // https://github.com/expressjs/session#options
+>>>>>>> master
 }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,13 +45,22 @@ app.get('/*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    res.send(err);
+  res.send(err);
 });
 
 sync()
+<<<<<<< HEAD
     .then(() => {
         console.log('synced');
         app.listen(port, () => {
             console.log(`DJRC listening on ${port}`);
         });
     })
+=======
+  .then(() => {
+    console.log('synced');
+    app.listen(port, () => {
+      console.log(`DJRC listening on ${port}`);
+    });
+  });
+>>>>>>> master

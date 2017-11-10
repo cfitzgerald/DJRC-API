@@ -2,6 +2,7 @@
 
 const db = require('./models/db');
 const {Genre, Promo, User, Venue } = require('./models/index').models;
+const bcrypt = require('bcrypt');
 
 
 const shuffle = (array) => {
@@ -9,13 +10,25 @@ const shuffle = (array) => {
 
   while (currentIndex !== 0){
     randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -=1;
+    currentIndex -= 1;
     tempVal = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = tempVal;
   }
   return array;
-}
+};
+
+const createPassword = (password) => {
+  return bcrypt.genSalt(10)
+    .then(salt => {
+      return bcrypt.hash(password, salt);
+    })
+    .then(hash => {
+        return hash;
+    })
+    .catch(err => console.log(err));
+};
+
 const seed = () => {
   return db.sync({force: true})
   .then(() => {
@@ -39,13 +52,22 @@ const seed = () => {
       genres = _genres;
     })
     .then(() => {
+      //Password Creation for Userrs
+      return Promise.all([
+        createPassword('Dan'),
+        createPassword('Jon'),
+        createPassword('Colin'),
+        createPassword('Rav'),
+      ]);
+    })
+    .then(([passD, passJ, passC, passR]) => {
       //User Creation
       return Promise.all([
-        User.create({name: 'Dan', email: 'Dan@dan.com', password: 'Dan', isBusiness: false, gender: 'male'}),
-        User.create({name: 'Jon', email: 'Jon@jon.com', password: 'Jon', isBusiness: false, gender: 'male'}),
-        User.create({name: 'Colin', email: 'Colin@colin.com', password: 'Colin', isBusiness: false, gender: 'male'}),
-        User.create({name: 'Ravette', email: 'Rav@rav.com', password: 'Rav', isBusiness: false, gender: 'female'})
-      ])
+        User.create({firstName: 'Dan', lastName: 'Weissbard', email: 'Dan@dan.com', password: passD, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Jon', lastName: 'Brandwein', email: 'Jon@jon.com', password: passJ, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Colin', lastName: 'FitzGerald', email: 'Colin@colin.com', password: passC, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Ravette', lastName: 'Rawow', email: 'Rav@rav.com', password: passR, isBusiness: false, gender: 'female'})
+      ]);
     })
     .then(() => {
       return Promise.all([
