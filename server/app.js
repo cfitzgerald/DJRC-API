@@ -5,6 +5,13 @@ const sync = require('./db/models/').sync;
 const port = process.env.PORT || 3002;
 
 const bodyParser = require('body-parser');
+const session = require('express-session');
+
+app.use(session({
+  secret: 'haha yes',
+  resave: false,
+  saveUninitialized: false, // https://github.com/expressjs/session#options
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,13 +27,13 @@ app.get('/*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    res.send(err);
+  res.send(err);
 });
 
 sync()
   .then(() => {
-      console.log('synced');
-      app.listen(port, () => {
-          console.log(`DJRC listening on ${port}`);
-      });
-  })
+    console.log('synced');
+    app.listen(port, () => {
+      console.log(`DJRC listening on ${port}`);
+    });
+  });
