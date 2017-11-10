@@ -28,6 +28,7 @@ passport.use(new LocalStrategy({
                     done(null, false);
                 }
                 if (user) {
+                    //for some reason user.validate password wasn't working
                     bcrypt.compare(password, user.password)
                         .then(res => {
                             if (!res) {
@@ -45,7 +46,6 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
-    console.log('asdfads');
     User.findById(payload.id)
         .then(user => {
             if (user) {
@@ -61,7 +61,6 @@ passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
 
 router.get('/protected', function (req, res, next) {
     passport.authenticate('jwt', { session: false }, function (err, user, info) {
-        console.log(info);
         if (err) {
             return next(err);
         }
