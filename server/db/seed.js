@@ -63,10 +63,10 @@ const seed = () => {
     .then(([passD, passJ, passC, passR]) => {
       //User Creation
       return Promise.all([
-        User.create({name: 'Dan', email: 'Dan@dan.com', password: passD, isBusiness: false, gender: 'male'}),
-        User.create({name: 'Jon', email: 'Jon@jon.com', password: passJ, isBusiness: false, gender: 'male'}),
-        User.create({name: 'Colin', email: 'Colin@colin.com', password: passC, isBusiness: false, gender: 'male'}),
-        User.create({name: 'Ravette', email: 'Rav@rav.com', password: passR, isBusiness: false, gender: 'female'})
+        User.create({firstName: 'Dan', lastName: 'Weissbard', email: 'Dan@dan.com', password: passD, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Jon', lastName: 'Brandwein', email: 'Jon@jon.com', password: passJ, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Colin', lastName: 'FitzGerald', email: 'Colin@colin.com', password: passC, isBusiness: false, gender: 'male'}),
+        User.create({firstName: 'Ravette', lastName: 'Rawow', email: 'Rav@rav.com', password: passR, isBusiness: false, gender: 'female'})
       ]);
     })
     .then(() => {

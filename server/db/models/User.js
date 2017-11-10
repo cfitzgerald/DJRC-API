@@ -20,12 +20,21 @@ const saltPassword = (user) => {
 };
 
 const User = db.define('user', {
-  name: {
+  firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: {
-        msg: 'Please provide a name.'
+        msg: 'Please provide a first name.'
+      }
+    }
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: 'Please provide a last name.'
       }
     }
   },
@@ -71,6 +80,19 @@ const User = db.define('user', {
   },
   gender: {
     type: Sequelize.STRING
+  }
+}, {
+  getterMethods: {
+    fullName: function() {
+      return this.firstName + '' + this.lastName;
+    }
+  },
+  setterMethods: {
+    fullName: function(fullname) {
+      var split = fullname.split('');
+      this.firstName = split[0];
+      this.lastName = split[1];
+    }
   }
 }, {
   hooks: {
