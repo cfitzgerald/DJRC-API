@@ -27,7 +27,7 @@ router.post('/login', (req, res, next) => {
         }
         if (user) {
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-            res.status(200).json({ token });
+            res.status(200).json({user, token });
         }
     })(req, res, next);
 })
