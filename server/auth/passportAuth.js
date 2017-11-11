@@ -33,7 +33,14 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 })
 
-router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-currently-playing','streaming','user-read-email', 'user-read-recently-played'], session: false }), (req, res, next) => {
+router.all('/getUser', (req, res, next) =>{
+    passport.authenticate('jwt', (err, user) => {
+        if (err) console.log(err);
+        res.status(200).json(user);
+    })(req, res, next)
+});
+
+router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-currently-playing', 'streaming', 'user-read-email', 'user-read-recently-played'], session: false }), (req, res, next) => {
     next();
 });
 
@@ -43,18 +50,18 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
         const spotifyApi = new SpotifyWebApi;
         spotifyApi.setAccessToken(req.user.spotifyAccessToken)
         spotifyApi.getMyRecentlyPlayedTracks()
-        .then(data => { 
-            const songs = [];
-            data.body.items.forEach(song => {
-                const track = {};
-                track.artist = song.track.artists[0].name;
-                track.song = song.track.name;
-                songs.push(track);
-            })     
-            res.send(songs)
-        }).catch(err => {
-            console.log(err);
-        })
+            .then(data => {
+                const songs = [];
+                data.body.items.forEach(song => {
+                    const track = {};
+                    track.artist = song.track.artists[0].name;
+                    track.song = song.track.name;
+                    songs.push(track);
+                })
+                res.send(songs)
+            }).catch(err => {
+                console.log(err);
+            })
     });
 
 
