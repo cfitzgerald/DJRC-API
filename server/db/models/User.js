@@ -22,21 +22,21 @@ const saltPassword = (user) => {
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'Please provide a first name.'
-      }
-    }
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: {
+    //     msg: 'Please provide a first name.'
+    //   }
+    // }
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: {
-        msg: 'Please provide a last name.'
-      }
-    }
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: {
+    //     msg: 'Please provide a last name.'
+    //   }
+    // }
   },
   address: {
     type: Sequelize.STRING
@@ -94,13 +94,9 @@ const User = db.define('user', {
       this.lastName = split[1];
     }
   }
-}, {
-  hooks: {
-    beforeCreate: (user) => {
-      return saltPassword(user);
-    }
-  }
 });
+
+User.beforeSave(saltPassword);
 
 User.findBySessionId = function(id) {
   // if (!id){
