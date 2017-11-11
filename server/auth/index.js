@@ -65,26 +65,20 @@ passport.use(new SpotifyStrategy({
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     callbackURL: process.env.SPOTIFY_CALLBACK_URL
 }, function (accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    User.findOne({
+    console.log('1st', accessToken);
+    User.findOrCreate({
         where: {
             spotifyId: profile.id
         }
     })
+        .then(([user]) => {
+            user.spotifyAccessToken = accessToken;
+            return user.save();
+        })
         .then(user => {
-            if (user) {
-                return done(null, user)
-            }
-
-            else {
-                User.create({
-                    spotifyId: profile.id
-                })
-                    .then(user => {
-                        return done(null, user);
-                    })
-            }
-        }).catch(err => {
+            return done(null, user);
+        })
+        .catch(err => {
             console.log(err);
         })
 }
