@@ -27,9 +27,21 @@ router.post('/login', (req, res, next) => {
         }
         if (user) {
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-            res.status(200).json({user, token });
+            res.status(200).json({ user, token });
         }
     })(req, res, next);
 })
+
+router.get('/spotify', passport.authenticate('spotify', { session: false }), (req, res, next) => {
+    next();
+});
+
+router.get('/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/', session: false }),
+    (req, res) => {
+        const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET)
+        res.status(200).json({ user: req.user, token });
+        // res.redirect('/');
+    });
+
 
 module.exports = router;

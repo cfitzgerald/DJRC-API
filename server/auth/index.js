@@ -3,6 +3,7 @@ const db = require('../db/models');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { User } = db.models;
@@ -58,6 +59,36 @@ passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
         })
 
 }));
+
+passport.use(new SpotifyStrategy({
+    clientID: process.env.SPOTIFY_CLIENTID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    callbackURL: process.env.SPOTIFY_CALLBACK_URL
+}, function (accessToken, refreshToken, profile, done) {
+    console.log(profile);
+    User.findOne({
+        where: {
+            spotifyId: profile.id
+        }
+    })
+        .then(user => {
+            if (user) {
+                return done(null, user)
+            }
+
+            else {
+                User.create({
+                    spotifyId: profile.id
+                })
+                    .then(user => {
+                        return done(null, user);
+                    })
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+}
+))
 
 router.post('/login', (req, res, next) => {
 
