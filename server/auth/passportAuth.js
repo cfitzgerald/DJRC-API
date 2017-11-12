@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../db/models');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+var SpotifyWebApi = require('spotify-web-api-node');
 
 const { User } = db.models;
 
@@ -27,9 +28,41 @@ router.post('/login', (req, res, next) => {
         }
         if (user) {
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-            res.status(200).json({user, token });
+            res.status(200).json({ user, token });
         }
     })(req, res, next);
 })
+
+router.all('/getUser', (req, res, next) =>{
+    passport.authenticate('jwt', (err, user) => {
+        if (err) console.log(err);
+        res.status(200).json(user);
+    })(req, res, next)
+});
+
+router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-currently-playing', 'streaming', 'user-read-email', 'user-read-recently-played'], session: false }), (req, res, next) => {
+    next();
+});
+
+router.get('/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/', session: false }),
+    (req, res) => {
+        const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET)
+        const spotifyApi = new SpotifyWebApi;
+        spotifyApi.setAccessToken(req.user.spotifyAccessToken)
+        spotifyApi.getMyRecentlyPlayedTracks()
+            .then(data => {
+                const songs = [];
+                data.body.items.forEach(song => {
+                    const track = {};
+                    track.artist = song.track.artists[0].name;
+                    track.song = song.track.name;
+                    songs.push(track);
+                })
+                res.send(songs)
+            }).catch(err => {
+                console.log(err);
+            })
+    });
+
 
 module.exports = router;
