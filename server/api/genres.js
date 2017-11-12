@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const db = require('../db/models');
-const {Genre} = db;
+const {Genre} = db.models;
 
 module.exports = router;
 

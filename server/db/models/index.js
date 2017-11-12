@@ -10,4 +10,13 @@ Genre.belongsToMany(Venue, { through: 'genreVenue' });
 Venue.belongsToMany(User, { through: 'favorite' });
 User.belongsToMany(Venue, { through: 'favorite' });
 
-module.exports = {db, Genre, User, Venue, Promo};
+const sync = () => db.sync();
+
+module.exports = {sync,
+  models: {
+    Genre,
+    User,
+    Venue,
+    Promo
+  }
+};
