@@ -1,10 +1,18 @@
 body {
-  color: #e66800;
-  background-color: #fafafa;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
   padding-top: 70px;
   -webkit-font-smoothing: antialiased;
+}
+
+.dark {
+  color: #fff;
+  background-color: #222;
+}
+
+.light {
+  color: #e66800;
+  background-color: #fafafa;
 }
 
 h1#landing-title {
@@ -35,5 +43,12 @@ p#signup-lead {
   background-color: inherit;
   border: none;
   font-family: 'Zilla Slab', serif;
+  font-weight: 400;
+}
+
+#landing-team {
+  color: #777;
+  font-family: 'Zilla Slab', serif;
+  font-size: 1.25em;
   font-weight: 400;
 }

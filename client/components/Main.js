@@ -7,10 +7,13 @@ import Landing from './Landing';
 import Spotify from './Spotify';
 // import Navbar from './Navbar';
 
+// store
+import { fetchVenues } from '../store';
+
 class Main extends Component {
 
   componentDidMount() {
-    // console.log('componentDidMount: Main');
+    this.props.fetchInitialData();
   }
 
   render() {
@@ -32,8 +35,11 @@ const mapStateToProps = () => {
   };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return {
+    fetchInitialData: () => {
+      dispatch(fetchVenues());
+    }
   };
 };
 
