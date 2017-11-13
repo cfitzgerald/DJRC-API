@@ -12,7 +12,7 @@ export function getUsers(users){
 // THUNK CREATOR(s)
 export function fetchUsers(){
   return (dispatch) => {
-    return axios.get('/api/user')
+    return axios.get('/api/users')
       .then(result => result.data)
       .then(users => {
         dispatch(getUsers(users));
@@ -23,7 +23,7 @@ export function fetchUsers(){
 
 export function deleteUser(id){
   return (dispatch) => {
-    return axios.delete(`api/user/${id}`)
+    return axios.delete(`api/users/${id}`)
     .then(() => {
       dispatch(fetchUsers());
     });
@@ -32,7 +32,7 @@ export function deleteUser(id){
 
 export function updateUser(user, history){
   return (dispatch) => {
-    return axios.put(`api/user/${user.id}`, user)
+    return axios.put(`api/users/${user.id}`, user)
     .then(() => {
       if (user.currentPassword){
         history.push('/');
@@ -44,7 +44,7 @@ export function updateUser(user, history){
 
 export function resetPassword(id){
   return (dispatch) => {
-    return axios.put(`api/user/${id}`, { passwordExpired: true })
+    return axios.put(`api/users/${id}`, { passwordExpired: true })
     .then( () => {
       dispatch(fetchUsers());
     });
