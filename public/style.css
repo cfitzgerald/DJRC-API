@@ -19,6 +19,7 @@ h1#landing-title {
   font-weight: 700;
 }
 
+.landing-cards,
 p#landing-lead {
   color: #777;
   font-family: 'Zilla Slab', serif;

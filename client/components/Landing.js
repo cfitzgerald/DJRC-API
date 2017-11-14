@@ -11,17 +11,54 @@ const Landing = () => {
     <div id="landing-container" className="container">
 
       <div id="landing-header">
-        <h1 id="landing-title" className="text-center">BarCast</h1>
+        <h1 id="landing-title" className="text-center">(BarCast Logo)</h1>
         <p id="landing-lead" className="text-center">A curated suggestion engine to find local bars playing the genre of music you want to hear right now.</p>
       </div>
 
-      <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
-        <div className="card-header">Header</div>
-        <div className="card-body text-dark">
-          <h4 className="card-title">Secondary card title</h4>
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div className="row landing-cards">
+
+        <div className="col-sm-4">
+          <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
+            <div className="card-header">ICON?</div>
+            <div className="card-body text-dark">
+              <h4 className="card-title">Why use it...</h4>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">For users...</li>
+                <li className="list-group-item">For venue owners...</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div className="col-sm-4">
+          <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
+            <div className="card-header">ICON?</div>
+            <div className="card-body text-dark">
+              <h4 className="card-title">How to use it...</h4>
+              <p className="card-text">Animated gifs / screenshots here?</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-sm-4">
+          <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
+            <div className="card-header">ICON?</div>
+            <div className="card-body text-dark">
+              <h4 className="card-title">Technologies/APIs</h4>
+              <p className="card-text">We've got:</p>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">React Native</li>
+                <li className="list-group-item">Google Maps API</li>
+                <li className="list-group-item">Spotify API</li>
+                <li className="list-group-item">Maybe Gracenote API</li>
+                <li className="list-group-item">Maybe Echo Nest API</li>
+                <li className="list-group-item">...</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+     </div>
 
       <div id="landing-team">
         <h3>Made by these guys:</h3>
