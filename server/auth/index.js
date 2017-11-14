@@ -47,7 +47,8 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
-    User.findById(payload.id)
+    const id = payload.spotifyId ? { spotifyId: payload.spotifyId } : { id: payload.id }
+    User.findOne({ where: id })
         .then(user => {
             if (user) {
                 done(null, user)
@@ -65,6 +66,7 @@ passport.use(new SpotifyStrategy({
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     callbackURL: process.env.SPOTIFY_CALLBACK_URL
 }, function (accessToken, refreshToken, profile, done) {
+    console.log('asdfsd');
     User.findOrCreate({
         where: {
             spotifyId: profile.id
