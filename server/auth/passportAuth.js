@@ -58,7 +58,9 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
                     track.song = song.track.name;
                     songs.push(track);
                 })
-                res.send(songs)
+                // res.send(songs)
+                console.log(songs);
+                res.redirect('exp://172.16.22.146:19000');
             }).catch(err => {
                 console.log(err);
             })
