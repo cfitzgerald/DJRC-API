@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const db = require('../db/models');
-const {Venue} = db.models;
+const { Venue } = db.models;
 
 
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Venue.findAll()
+  Venue.findAll({ include: [{ all: true }] })
     .then(venues => res.send(venues))
     .catch(er => next(er));
 });
@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
   Venue.create(req.body)
     .then(() => {
       return Venue.findAll()
-        .then(venues=> res.send(venues))
+        .then(venues => res.send(venues))
     })
     .catch(er => next(er));
 });
