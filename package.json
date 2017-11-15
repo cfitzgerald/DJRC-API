@@ -13,6 +13,7 @@
     "start": "node server/app.js"
   },
   "dependencies": {
+    "@mapbox/polyline": "^0.2.0",
     "axios": "^0.17.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -23,6 +24,8 @@
     "bootstrap": "^4.0.0-beta.2",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "nodemon": "^1.12.1",
+    "oauth2orize": "^1.11.0",
     "pg": "^7.3.0",
     "react": "^16.0.0-beta.5",
     "react-dom": "^16.0.0",
