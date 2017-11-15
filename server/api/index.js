@@ -1,6 +1,6 @@
 const api = require('express').Router();
 
-
+api.use('/auth', require('./auth'));
 api.use('/genres', require('./genres'));
 // api.use('/promos', require('./promos'));
 api.use('/users', require('./users'));
@@ -12,7 +12,7 @@ api.use((req, res, next) => {
 });
 
 api.get('/', (req, res, next) => {
-  res.send('api page')
-})
+  res.send('api page');
+});
 
 module.exports = api;
