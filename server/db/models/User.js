@@ -2,6 +2,8 @@ const db = require('./db');
 const Sequelize = db.Sequelize;
 const bcrypt = require('bcrypt');
 
+const Op = Sequelize.Op;
+
 const createError = (message) => {
   const error = new Error(message);
   error.status = 401;
@@ -154,7 +156,7 @@ User.spotify = function () {
   return User.findAll({
     where: {
       spotifyId: {
-        $gt: 0
+        [Op.not]: null
       }
     }
   })
