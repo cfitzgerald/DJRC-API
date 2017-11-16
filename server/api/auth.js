@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   User.findBySessionId(req.session.userId)
     .then(user => res.send(user))
+    
     .catch(next);
 });
 
