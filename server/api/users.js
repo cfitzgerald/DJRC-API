@@ -16,6 +16,12 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/spotify', (req, res, next) => {
+  User.spotify()
+    .then(users => res.send(users))
+    .catch(next);
+});
+
 router.post('/', (req, res, next) => {
   User.create(req.body)
     .then(user => res.status(200).send(user))
