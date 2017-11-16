@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/spotify', (req, res, next) => {
-  User.spotify(req.params.id)
+  User.spotify()
     .then(user => res.send(user))
     .catch(next);
 });

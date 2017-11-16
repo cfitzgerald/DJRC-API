@@ -1,6 +1,8 @@
 const db = require('./db');
 const Sequelize = db.Sequelize;
 
+const Op = Sequelize.Op;
+
 const Venue = db.define('venue', {
     name: {
         type: Sequelize.STRING
@@ -28,13 +30,26 @@ const Venue = db.define('venue', {
     }
 });
 
-Venue.updateOwner = function(venueId, userId){
+Venue.updateOwner = function (venueId, userId) {
     Venue.findById(venueId)
-    .then((venue) => {
+        .then((venue) => {
 
-        venue.setOwner(userId)
-        return venue.save()
-    })
+            venue.setOwner(userId)
+            return venue.save()
+        })
 }
+
+
+Venue.spotify = function () {
+    return Venue.findAll({
+        where: {
+            OwnerId: {
+                [Op.gt]: 0
+            }
+        }
+    })
+
+}
+
 
 module.exports = Venue;
