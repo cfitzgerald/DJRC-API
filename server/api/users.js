@@ -10,17 +10,19 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/spotify', (req, res, next) => {
+  User.spotify()
+    .then(users => res.send(users))
+    .catch(next);
+});
+
+
 router.get('/:id', (req, res, next) => {
   User.findById(req.params.id)
     .then(user => res.send(user))
     .catch(next);
 });
 
-router.get('/spotify', (req, res, next) => {
-  User.spotify()
-    .then(users => res.send(users))
-    .catch(next);
-});
 
 router.post('/', (req, res, next) => {
   User.create(req.body)
