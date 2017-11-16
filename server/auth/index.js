@@ -47,7 +47,15 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
-    User.findById(payload.id)
+    const id = payload.spotifyId ? 'spotifyId' : 'id';
+    const load = payload.spotifyId ? payload.spotifyId : payload.id;
+
+    console.log('id', id);
+    User.findOne({
+        where: {
+            id: load
+        }
+    })
         .then(user => {
             if (user) {
                 done(null, user)
@@ -71,6 +79,7 @@ passport.use(new SpotifyStrategy({
         }
     })
         .then(([user]) => {
+            user.email = profile._json.email;
             user.spotifyAccessToken = accessToken;
             return user.save();
         })
@@ -82,17 +91,5 @@ passport.use(new SpotifyStrategy({
         })
 }
 ))
-
-router.post('/login', (req, res, next) => {
-
-})
-
-router.post('/signup', (req, res, next) => {
-
-})
-
-router.post('/logout', (req, res, next) => {
-
-})
 
 module.exports = router;
