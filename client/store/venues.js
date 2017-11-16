@@ -9,6 +9,14 @@ export function getVenues(venues){
   return { type: GET_VENUES, venues };
 }
 
+export function updateOwner (venueId, userId) {
+    return axios.put(`/api/venues/${venueId}`,  { userId } )
+    .then(res => res.data)
+    // .then(() => dispatch(fetchVenues()))
+
+}
+
+
 // THUNK CREATOR(s)
 export function fetchVenues(){
   return (dispatch) => {

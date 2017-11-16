@@ -11,40 +11,39 @@ class WebAdmin extends Component {
 
     }
     this.handleFilter = this.handleFilter.bind(this);
-    this.onSubmitHandler = this.onSubmitHandler.bind(this)
+
     this.onChangeHandler = this.onChangeHandler.bind(this)
   }
 
-  cpmonentDidMount(){
-    this.setState({
-      venues: fetchVenues(),
-    users: fetchUsers()})
+  componentDidMount(){
+    this.props.fetchVenues();
+    this.props.fetchUsers();
   }
   handleFilter(ev){
     this.setState({filterValue: ev.target.value})
   }
 
   onChangeHandler(ev){
-    this.setState({userId: ev.target.value})
+    this.setState({userId: ev.target.value * 1})
   }
 
-  onSubmitHandler(ev){
-    ev.preventDefault()
-    this.props.updateOwner(this.state.userId)
-  }
+
 
   render(){
-    const { handleFilter, onSubmitHandler, onChangeHandler } = this;
+    const { handleFilter, onChangeHandler } = this;
     const { filterValue } = this.state;
-    // const filteredVenues = this.props.venues.filter(venue => venue.name.match(filterValue));
-    const filteredVenues = [{id: 1, name: 'Pizza Bar'}, {id: 2, name: 'Drink Bar'}]
-    // const users = this.props.users;
-    const users = [{id:1, name: 'bob'}, {id: 2, name: 'tony'}]
-    console.log(this.state);
-    console.log(this.props);
+    let filteredVenues, users
+    if (this.props.venues){
+    filteredVenues = this.props.venues.filter(venue => venue.name.match(filterValue));
+    }
+
+    if (this.props.users){
+      users = this.props.users
+    }
+    console.log(users);
     return(
      <div>
-
+      <h2>Bar Name Filter</h2>
        <form className='form-group'>
         <input
           onChange={ handleFilter }
@@ -68,13 +67,16 @@ class WebAdmin extends Component {
                   <td> { bar.id } </td>
                   <td> { bar.name } </td>
                   <td>
-                    <form onSubmit={(ev)=> { this.props.updateOwner(bar.id, ev.target.value)}}>
+                    <form onSubmit={()=> {
+
+                      this.props.updateOwner(bar.id, this.state.userId)}}
+                      >
                       <select onChange={ onChangeHandler }>
 
                         {
                           users.map( user => {
                             return(
-                              <option key= {user.id} value={user.id}> {user.id} - {user.name} </option>
+                              <option key= {user.id} value={user.id}> {user.id} - {user.fullName} </option>
                             )
                           })
                         }
