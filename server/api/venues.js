@@ -30,7 +30,7 @@ router.put('/:id', (req, res, next) => {
   // Venue.update(req.body, { where: { id: req.params.id } })
   //   .then(venue => res.send(venue))
   //   .catch(er => next(er))
-  console.log(req.body);
+
   Venue.updateOwner(req.params.id, req.body.userId)
   .then(()=> res.sendStatus(200))
   .catch(er => next(er))

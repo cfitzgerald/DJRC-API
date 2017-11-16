@@ -40,7 +40,7 @@ class WebAdmin extends Component {
     if (this.props.users){
       users = this.props.users
     }
-    console.log(users);
+
     return(
      <div>
       <h2>Bar Name Filter</h2>
