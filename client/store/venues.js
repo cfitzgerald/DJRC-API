@@ -14,12 +14,6 @@ export function getVenueCount(venueCount) {
   return { type: GET_VENUE_COUNT, venueCount };
 }
 
-export function updateOwner (venueId, userId) {
-    return axios.put(`/api/venues/${venueId}`,  { userId } )
-    .then(res => res.data)
-    // .then(() => dispatch(fetchVenues()))
-}
-
 // THUNK CREATOR(s)
 export function fetchVenues() {
   return (dispatch) => {
@@ -41,6 +35,12 @@ export function fetchVenueCount() {
       })
       .catch(err => dispatch(setError(err.response.data)));
   };
+}
+
+export function updateOwner (venueId, userId) {
+    return axios.put(`/api/venues/${venueId}`,  { userId } )
+    .then(res => res.data)
+    // .then(() => dispatch(fetchVenues()))
 }
 
 export function deleteVenue(id) {
