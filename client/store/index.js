@@ -24,5 +24,5 @@ export * from './auth';
 export * from './error';
 // export * from './genres';
 // export * from './promos';
-// export * from './users';
+export * from './users';
 export * from './venues';

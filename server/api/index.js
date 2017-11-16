@@ -5,6 +5,7 @@ api.use('/genres', require('./genres'));
 // api.use('/promos', require('./promos'));
 api.use('/users', require('./users'));
 api.use('/venues', require('./venues'));
+api.use('/directions', require('./directions'));
 
 api.use((req, res, next) => {
   res.status(404).send('Page Not Found');

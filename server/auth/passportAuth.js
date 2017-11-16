@@ -33,20 +33,21 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 })
 
-router.all('/getUser', (req, res, next) =>{
+router.all('/getUser', (req, res, next) => {
     passport.authenticate('jwt', (err, user) => {
         if (err) console.log(err);
         res.status(200).json(user);
     })(req, res, next)
 });
 
-router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-currently-playing', 'streaming', 'user-read-email', 'user-read-recently-played'], session: false }), (req, res, next) => {
-    next();
-});
+router.get('/spotify', passport.authenticate('spotify',
+    { scope: ['user-read-currently-playing', 'streaming', 'user-read-email', 'user-read-recently-played'], session: false }), (req, res, next) => {
+        next();
+    });
 
 router.get('/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/', session: false }),
     (req, res) => {
-        const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET)
+        const token = jwt.sign({ spotifyId: req.user.id, spotifyAccessToken: req.user.spotifyAccessToken }, process.env.JWT_SECRET)
         const spotifyApi = new SpotifyWebApi;
         spotifyApi.setAccessToken(req.user.spotifyAccessToken)
         spotifyApi.getMyRecentlyPlayedTracks()
@@ -58,7 +59,7 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
                     track.song = song.track.name;
                     songs.push(track);
                 })
-                res.send(songs)
+                res.redirect(`exp://5c-miy.jdb409.djrc-native.exp.direct:80/+token=${token}`);
             }).catch(err => {
                 console.log(err);
             })
