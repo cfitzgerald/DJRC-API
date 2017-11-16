@@ -28,4 +28,12 @@ const Venue = db.define('venue', {
     }
 });
 
+Venue.UpdateOwner = function(venueId, userId){
+    Venue.findById(venueId)
+    .then((venue) => {
+        venue.setUser(userId)
+        return venue.save()
+    })
+}
+
 module.exports = Venue;
