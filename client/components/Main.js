@@ -8,13 +8,12 @@ import Spotify from './Spotify';
 // import Navbar from './Navbar';
 
 // store
-import { fetchVenues } from '../store';
+// import {} from '../store';
 
 class Main extends Component {
 
-  componentDidMount() {
-    this.props.fetchInitialData();
-  }
+  // componentDidMount() {
+  // }
 
   render() {
     return (
@@ -37,9 +36,6 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchInitialData: () => {
-      dispatch(fetchVenues());
-    }
   };
 };
 

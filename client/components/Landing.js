@@ -5,7 +5,13 @@ import { connect } from 'react-redux';
 // components
 import SignupForm from './SignupForm';
 
-const Landing = () => {
+// store
+import { fetchVenueCount } from '../store';
+
+const Landing = (props) => {
+
+  const { venueCount } = props;
+  console.log('props: venueCount = ', venueCount());
 
   return (
     <div id="landing-container" className="container">
@@ -23,6 +29,7 @@ const Landing = () => {
             <div className="card-body text-dark">
               <h4 className="card-title">Why use it...</h4>
               <ul className="list-group list-group-flush">
+                <li className="list-group-item">We've got {venueCount} venues!</li>
                 <li className="list-group-item">For users...</li>
                 <li className="list-group-item">For venue owners...</li>
               </ul>
@@ -79,8 +86,11 @@ const mapStateToProps = () => {
   };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return {
+    venueCount: () => {
+      dispatch(fetchVenueCount());
+    },
   };
 };
 
