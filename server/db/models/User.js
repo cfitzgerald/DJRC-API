@@ -152,14 +152,14 @@ User.login = function (credentials) {
     .catch(err => console.log(err));
 };
 
-User.spotify = function () {
-  return User.findAll({
-    where: {
-      spotifyId: {
-        [Op.not]: null
-      }
-    }
-  })
-}
+// User.spotify = function () {
+//   return User.findAll({
+//     where: {
+//       spotifyId: {
+//         [Op.not]: null
+//       }
+//     }
+//   })
+// }
 
 module.exports = User;

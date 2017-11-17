@@ -44,8 +44,12 @@ Venue.updateOwner = function (venueId, userId) {
 Venue.spotify = function () {
     return Venue.findAll({
         include: [{
-            model: Task,
-            where: { state: Sequelize.col('project.state') }
+            model: User,
+            where: {
+                spotifyId: {
+                    [Op.not]: null
+                }
+            }
         }]
     }
         , {
