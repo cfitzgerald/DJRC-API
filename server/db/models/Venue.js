@@ -1,5 +1,6 @@
 const db = require('./db');
 const Sequelize = db.Sequelize;
+const User = require('./User');
 
 const Op = Sequelize.Op;
 
@@ -42,12 +43,18 @@ Venue.updateOwner = function (venueId, userId) {
 
 Venue.spotify = function () {
     return Venue.findAll({
-        where: {
-            OwnerId: {
-                [Op.gt]: 0
+        include: [{
+            model: Task,
+            where: { state: Sequelize.col('project.state') }
+        }]
+    }
+        , {
+            where: {
+                OwnerId: {
+                    [Op.gt]: 0
+                }
             }
-        }
-    })
+        })
 
 }
 
