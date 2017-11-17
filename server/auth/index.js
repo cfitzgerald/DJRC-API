@@ -73,12 +73,16 @@ passport.use(new SpotifyStrategy({
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     callbackURL: process.env.SPOTIFY_CALLBACK_URL
 }, function (accessToken, refreshToken, profile, done) {
-    User.findOrCreate({
+    User.findOne({
         where: {
             spotifyId: profile.id
         }
     })
-        .then(([user]) => {
+        .then(user => {
+            return user ? user :
+                User.create({ spotifyId: profile.id })
+        })
+        .then(user => {
             user.email = profile._json.email;
             user.spotifyAccessToken = accessToken;
             return user.save();
