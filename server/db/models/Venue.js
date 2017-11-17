@@ -43,22 +43,20 @@ Venue.updateOwner = function (venueId, userId) {
 
 Venue.spotify = function () {
     return Venue.findAll({
-        include: [{
-            model: User,
-            where: {
-                spotifyId: {
-                    [Op.not]: null
+        include: [
+            {
+                model: User,
+                as: 'Owner',
+                where: {
+                    spotifyId: {
+                        [Op.not]: null
+                    }
                 }
-            }
-        }]
-    }
-        , {
-            where: {
-                OwnerId: {
-                    [Op.gt]: 0
-                }
-            }
-        })
+            },
+
+        ]
+    })
+
 
 }
 
