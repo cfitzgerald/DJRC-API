@@ -53,11 +53,9 @@ Venue.spotify = function () {
                     }
                 }
             },
-
         ]
     })
-
-
+    .catch(console.log)
 }
 
 

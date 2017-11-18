@@ -12,11 +12,11 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.get('/spotify', (req, res, next) => {
-  Venue.spotify()
-    .then(venues => res.send(venues))
-    .catch(next);
-});
+// router.get('/spotify', (req, res, next) => {
+//   Venue.spotify()
+//     .then(venues => res.send(venues))
+//     .catch(next);
+// });
 
 router.get('/:id', (req, res, next) => {
   Venue.findById(req.params.id)
