@@ -19,6 +19,11 @@ h1#landing-title {
   font-weight: 700;
 }
 
+.landing-hr {
+  /*border-top: 1px dashed #ff4554;*/
+  border-top: 1px dotted #00c3e3;
+}
+
 .landing-cards,
 p#landing-lead {
   color: #777;

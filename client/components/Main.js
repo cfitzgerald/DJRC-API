@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 // components
 import Landing from './Landing';
 import Spotify from './Spotify';
-import WebAdmin from './WebAdmin'
+import WebAdmin from './WebAdmin';
 // import Navbar from './Navbar';
 
 // store
-// import {} from '../store';
+// import { fetchVenueCount } from '../store';
 
 class Main extends Component {
 
   // componentDidMount() {
+  //   this.props.fetchVenueCount();
   // }
 
   render() {
@@ -38,6 +39,9 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // fetchVenueCount: () => {
+    //   dispatch(fetchVenueCount());
+    // },
   };
 };
 
