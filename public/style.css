@@ -1,41 +1,76 @@
 body {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Lobster', cursive;
   font-weight: 400;
-  padding-top: 70px;
+  /*padding-top: 70px;*/
   -webkit-font-smoothing: antialiased;
 }
 
-.dark {
+/*.dark {
   color: #fff;
-  background-color: #222;
-}
+  background-color: #1a1a1a;
+}*/
 
 .light {
   color: #e66800;
-  background-color: #fafafa;
+  /*background-color: #fff;*/
+  background-color: #f7f7f7;
 }
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*.container {
+  padding-left: 0;
+  padding-right: 0;
+}*/
 
 h1#landing-title {
-  font-weight: 700;
+  color: #ff6763;
+  font-size: 3em;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
-.landing-hr {
-  /*border-top: 1px dashed #ff4554;*/
-  border-top: 1px dotted #00c3e3;
+/*http://www.paletton.com/#uid=75A0u0knl++bp+PhV+Yt1+WH7ZC*/
+
+.landing-hr-blue {
+  border-top: 1px solid #00c3e3;
+  margin: .5rem 0;
 }
 
-.landing-cards,
+.landing-hr-gray {
+  border-top: 1px solid #ccc;
+  margin: .5rem 0;
+}
+
+.landing-hr-orange {
+  border-top: 1px solid #ff6763;
+  margin: .5rem 0;
+}
+
+.landing-hr-pink {
+  border-top: 3px solid #ff4554;
+  margin: .5rem 0;
+}
+
+.landing-hr-yellow {
+  border-top: 2px solid #ffcba4;
+  margin: .5rem 0;
+}
+
+#landing-header {
+  /*background-color: #fff;*/
+  /*background-color: #f7f7f7;*/
+  padding-top: 20px;
+}
+
 p#landing-lead {
   color: #777;
   font-family: 'Zilla Slab', serif;
   font-size: 1.25em;
   font-weight: 400;
-}
-
-#signup-form-container {
-  border-top: 1px dashed #ddd;
-  padding-top: 20px;
-  margin-top: 10px;
 }
 
 p#signup-lead {
@@ -45,16 +80,56 @@ p#signup-lead {
   font-weight: 400;
 }
 
-#signup-form {
-  background-color: inherit;
-  border: none;
+#landing-body {
+  color: #777;
+  /*background-color: #fff;*/
+  /*background-color: #f7f7f7;*/
   font-family: 'Zilla Slab', serif;
+  font-size: 1em;
+  font-weight: 400;
+  padding-top: 10px;
+}
+
+#features {
+  padding: 10px 0;
+}
+
+#features h4 {
+  color: #ff6763;
+  /*background-color: #ffcba4;*/
+  /*border-bottom: 1px solid #ff6763;*/
   font-weight: 400;
 }
 
-#landing-team {
+#tech {
+  padding: 10px 0;
+}
+
+#tech h4 {
+  color: #ff6763;
+  /*background-color: #ff4554;*/
+  /*border-bottom: 1px solid #ff6763;*/
+  font-weight: 400;
+}
+
+#landing-footer {
+  /*background-color: #fff;*/
+  /*background-color: #f7f7f7;*/
+}
+
+#team {
   color: #777;
   font-family: 'Zilla Slab', serif;
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: 400;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+#team ul {
+  margin-left: 0;
+}
+
+#team li {
+  list-style-type: none;
 }

@@ -19,48 +19,52 @@ class Landing extends Component {
     const { venues } = this.props;
 
     return (
-      <div id="landing-container" className="container">
+      <div>
 
-        <div id="landing-header" className="text-center">
-          {/* <img className="img-fluid" src="/public/images/barcast-logo.png" alt="BarCast logo" /> */}
-          <h1 id="landing-title">BarCast</h1>
-          <p id="landing-lead">A curated suggestion engine to find local bars playing the genre of music you want to hear right now.</p>
+        <div id="landing-header" className="container-fluid text-center">
+
+          <div className="col-sm-12">
+            {/* <img className="img-fluid" src="/public/images/barcast-logo.png" alt="BarCast logo" /> */}
+            <h1 id="landing-title">BarCast</h1>
+            <p id="landing-lead">A curated suggestion engine to find local bars playing the genre of music you want to hear right now.</p>
+          </div>
+
+          <hr className="landing-hr-yellow" />
+          <hr className="landing-hr-pink" />
+          <hr className="landing-hr-blue" />
+
         </div>
 
-        <hr className="landing-hr" />
+        <div id="landing-body" className="container">
 
-        <div className="row landing-cards">
+          <div id="features" className="container">
+            <div className="row">
 
-          <div className="col-sm-4">
-            <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
-              <div className="card-header">ICON?</div>
-              <div className="card-body text-dark">
-                <h4 className="card-title">Why use it...</h4>
+              <div className="col-sm-4">
+                <h4>Why use it...</h4>
+              </div>
+
+              <div className="col-sm-8">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">We've got { venues ? venues : <em>so many</em> } venues!</li>
                   <li className="list-group-item">For users...</li>
                   <li className="list-group-item">For venue owners...</li>
                 </ul>
               </div>
+
             </div>
           </div>
 
-          <div className="col-sm-4">
-            <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
-              <div className="card-header">ICON?</div>
-              <div className="card-body text-dark">
-                <h4 className="card-title">How to use it...</h4>
-                <p className="card-text">Animated gifs / screenshots here?</p>
+          <hr className="landing-hr-gray" />
+
+          <div id="tech" className="container">
+            <div className="row">
+
+              <div className="col-sm-4">
+                <h4>Technologies/APIs</h4>
               </div>
-            </div>
-          </div>
 
-          <div className="col-sm-4">
-            <div className="card border-dark mb-3" style={{maxWidth: 20 + 'rem'}}>
-              <div className="card-header">ICON?</div>
-              <div className="card-body text-dark">
-                <h4 className="card-title">Technologies/APIs</h4>
-                <p className="card-text">We've got:</p>
+              <div className="col-sm-8">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">React Native</li>
                   <li className="list-group-item">Google Maps API</li>
@@ -70,21 +74,28 @@ class Landing extends Component {
                   <li className="list-group-item">...</li>
                 </ul>
               </div>
+
             </div>
           </div>
 
         </div>
 
-        <hr className="landing-hr" />
+        <div id="landing-footer" className="container-fluid text-center">
 
-        <div id="landing-team">
-          <h3>Made by these guys:</h3>
-          <ul>
-            <li><strong>D</strong>an Weissbard</li>
-            <li><strong>J</strong>onathan Brandwein</li>
-            <li><strong>R</strong>avish Rawal</li>
-            <li><strong>C</strong>olin FitzGerald</li>
-          </ul>
+          <hr className="landing-hr-yellow" />
+          <hr className="landing-hr-pink" />
+          <hr className="landing-hr-blue" />
+
+          <div id="team" className="container">
+
+            <ul className="list-group list-group-flush">
+              <li><strong>D</strong>an Weissbard</li>
+              <li><strong>J</strong>onathan Brandwein</li>
+              <li><strong>R</strong>avish Rawal</li>
+              <li><strong>C</strong>olin FitzGerald</li>
+            </ul>
+
+          </div>
         </div>
 
       </div>
