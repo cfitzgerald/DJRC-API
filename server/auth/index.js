@@ -19,12 +19,14 @@ passport.use(new LocalStrategy({
     session: false
 },
     function (username, password, done) {
+        console.log('un, pw', username, password)
         User.findOne({
             where: {
                 email: username
             }
         })
             .then(user => {
+                console.log('user', user)
                 if (!user) {
                     done(null, false);
                 }
@@ -41,6 +43,7 @@ passport.use(new LocalStrategy({
                         })
                 }
             }).catch(err => {
+                console.log('err', err)
                 done(err);
             })
     }
