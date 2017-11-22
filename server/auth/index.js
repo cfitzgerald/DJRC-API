@@ -85,6 +85,7 @@ passport.use(new SpotifyStrategy({
         .then(user => {
             user.email = profile._json.email;
             user.spotifyAccessToken = accessToken;
+            user.isBusiness = false;
             return user.save();
         })
         .then(user => {
