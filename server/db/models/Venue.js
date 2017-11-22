@@ -1,5 +1,6 @@
 const db = require('./db');
 const Sequelize = db.Sequelize;
+const User = require('./User');
 
 const Venue = db.define('venue', {
     name: {
@@ -34,6 +35,13 @@ Venue.updateOwner = function(venueId, userId){
 
         venue.setOwner(userId)
         return venue.save()
+    })
+    .then(() => {
+        User.findById(userId)
+        .then((user) => {
+            user.isBusiness = true;
+            return user.save();
+        })
     })
 }
 
