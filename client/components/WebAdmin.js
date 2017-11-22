@@ -38,7 +38,7 @@ class WebAdmin extends Component {
     }
 
     if (this.props.users){
-      users = this.props.users
+      users = this.props.users.filter(user => user.isBusiness === false)
     }
 
     return(
@@ -71,7 +71,9 @@ class WebAdmin extends Component {
 
                       this.props.updateOwner(bar.id, this.state.userId)}}
                       >
+                      {console.log(users)}
                       <select onChange={ onChangeHandler }>
+
 
                         {
                           users.map( user => {
