@@ -26,14 +26,16 @@ passport.use(new LocalStrategy({
             }
         })
             .then(user => {
-                console.log('user', user)
+                
                 if (!user) {
                     done(null, false);
                 }
                 if (user) {
+                    console.log('user', user)
                     //for some reason user.validate password wasn't working
                     bcrypt.compare(password, user.password)
                         .then(res => {
+                            console.log(res);
                             if (!res) {
                                 return done(null);
                             }
