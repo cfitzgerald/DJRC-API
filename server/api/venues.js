@@ -7,7 +7,26 @@ module.exports = router;
 
 router.get('/', (req, res, next) => {
   Venue.findAll({ include: [{ all: true }] })
-    .then(venues => res.send(venues))
+    .then(bars => {
+      bars = bars.map(bar => {
+          let genres = [];
+          let genreNames = [];
+          bar.genres.forEach(genre => {
+              genres.push(genre.id)
+              genreNames.push(genre.name)
+          })
+          return {
+              id: bar.id,
+              lat: bar.lat,
+              lon: bar.lon,
+              name: bar.name,
+              address: bar.address,
+              genres: genres,
+              genreNames
+          }
+      })
+      res.send(bars)
+    })
     .catch(er => next(er));
 });
 
