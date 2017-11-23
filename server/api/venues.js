@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
               name: bar.name,
               address: bar.address,
               genres: genres,
-              genreNames
+              genreNames 
           }
       })
       res.send(bars)
