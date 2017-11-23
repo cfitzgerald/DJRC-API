@@ -3,22 +3,22 @@ import { setError } from './error';
 
 // ACTION TYPE(s)
 const GET_VENUES = 'GET_VENUES';
-const GET_VENUE_COUNT = 'GET_VENUE_COUNT';
+// const GET_VENUE_COUNT = 'GET_VENUE_COUNT';
 
 // ACTION CREATOR(s)
 export function getVenues(venues) {
   return { type: GET_VENUES, venues };
 }
 
-export function getVenueCount(venueCount) {
-  return { type: GET_VENUE_COUNT, venueCount };
-}
+// export function getVenueCount(venueCount) {
+//   return { type: GET_VENUE_COUNT, venueCount };
+// }
 
 // THUNK CREATOR(s)
 export function fetchVenues() {
   return (dispatch) => {
     return axios.get('/api/venues')
-      .then(result => result.data.rows) // append .rows for findAndCountAll()
+      .then(res => res.data)
       .then(venues => {
         dispatch(getVenues(venues));
       })
@@ -26,16 +26,16 @@ export function fetchVenues() {
   };
 }
 
-export function fetchVenueCount() {
-  return (dispatch) => {
-    return axios.get('/api/venues')
-      .then(result => result.data.count) // append .count for findAndCountAll()
-      .then(count => {
-        dispatch(getVenueCount(count));
-      })
-      .catch(err => dispatch(setError(err.response.data)));
-  };
-}
+// export function fetchVenueCount() {
+//   return (dispatch) => {
+//     return axios.get('/api/venues')
+//       .then(result => result.data.count) // append .count for findAndCountAll()
+//       .then(count => {
+//         dispatch(getVenueCount(count));
+//       })
+//       .catch(err => dispatch(setError(err.response.data)));
+//   };
+// }
 
 export function updateOwner (venueId, userId) {
     return axios.put(`/api/venues/${venueId}`,  { userId } )
@@ -66,8 +66,8 @@ export default function reducer(state = [], action) {
   switch (action.type){
     case GET_VENUES:
       return action.venues;
-    case GET_VENUE_COUNT:
-      return action.venueCount;
+    // case GET_VENUE_COUNT:
+    //   return action.venueCount;
     default:
       return state;
   }

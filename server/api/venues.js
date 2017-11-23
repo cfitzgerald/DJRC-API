@@ -5,7 +5,7 @@ const { Venue } = db.models;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Venue.findAndCountAll({ include: [{ all: true }] })
+  Venue.findAll({ include: [{ all: true }] })
     .then(venues => res.send(venues))
     .catch(next);
 });
@@ -31,7 +31,7 @@ router.put('/:id', (req, res, next) => {
   //   .catch(er => next(er))
 
   Venue.updateOwner(req.params.id, req.body.userId)
-  .then(()=> res.sendStatus(200))
+  .then(() => res.sendStatus(200))
   .catch(next);
 });
 
