@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // components
-import SignupForm from './SignupForm';
+// import SignupForm from './SignupForm';
 
 // store
-import { fetchVenueCount } from '../store';
+// import { fetchVenueCount } from '../store';
 
 class Landing extends Component {
 
   componentDidMount() {
-    this.props.fetchVenueCount();
+    // this.props.fetchVenueCount();
   }
 
   render() {
 
-    const { venues } = this.props;
+    // const { venues } = this.props;
 
     return (
       <div>
@@ -46,7 +46,7 @@ class Landing extends Component {
 
               <div className="col-sm-8">
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">We've got { venues ? venues : <em>so many</em> } venues!</li>
+                  <li className="list-group-item">We've got so many venues!</li>
                   <li className="list-group-item">For users...</li>
                   <li className="list-group-item">For venue owners...</li>
                 </ul>
@@ -103,17 +103,13 @@ class Landing extends Component {
   }
 }
 
-const mapStateToProps = ({ venues }) => {
+const mapStateToProps = () => {
   return {
-    venues,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchVenueCount: () => {
-      dispatch(fetchVenueCount());
-    },
   };
 };
 
