@@ -1,9 +1,30 @@
 const router = require('express').Router();
 const db = require('../db/models');
+var SpotifyWebApi = require('spotify-web-api-node');
 const { Venue } = db.models;
 
 
 module.exports = router;
+
+const getSongsFromSpotify = (bar) => {
+  return new Promise((resolve, reject) => {
+      if (!bar.owner || !bar.owner.spotifyAccessToken) {
+          return resolve(bar);
+      }
+      let spotifyApi = new SpotifyWebApi();
+      spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
+      spotifyApi.getMyRecentlyPlayedTracks()
+          .then(data => {
+              bar.currentSong = data.items[0].track.name;
+              return resolve(bar);
+          })
+          .catch(err => {
+              console.log('err', err);
+              return resolve(bar);
+          })
+
+  })
+}
 
 router.get('/', (req, res, next) => {
   Venue.findAll({ include: [{ all: true }] })
@@ -15,6 +36,7 @@ router.get('/', (req, res, next) => {
               genres.push(genre.id)
               genreNames.push(genre.name)
           })
+          if (bar.Owner) console.log('hello', bar.Owner.spotifyRefreshToken);
           return {
               id: bar.id,
               lat: bar.lat,
@@ -25,10 +47,20 @@ router.get('/', (req, res, next) => {
               genreNames 
           }
       })
-      res.send(bars)
+      return bars
+      .then(bars => {
+        bars = bars.map(bar => {
+          return getSongsFromSpotify(bar);
+        })
+        return Promise.all(bars)
+      })
+      .then(bars => {
+        res.send(bars)
+      })
     })
     .catch(er => next(er));
 });
+
 
 router.get('/:id', (req, res, next) => {
   Venue.findById(req.params.id)
