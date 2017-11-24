@@ -38,7 +38,7 @@ class WebAdmin extends Component {
     }
 
     if (this.props.users){
-      users = this.props.users.filter(user => user.isBusiness === false)
+      users = this.props.users.filter(user => user.isBusiness !== true)
     }
 
     return(

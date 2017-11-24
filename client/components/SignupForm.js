@@ -11,17 +11,17 @@ class SignupForm extends Component {
       lastName: '',
       password: '',
     };
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  onChange(event){
+  handleChange(event){
     const change = {};
     change[event.target.name] = event.target.value;
     this.setState(change);
   }
 
-  onSubmit(event){
+  handleSubmit(event){
     event.preventDefault();
     const { email, firstName, lastName, password } = this.state;
     this.setState({ email: '', firstName: '', lastName: '', password: '' });
@@ -33,7 +33,7 @@ class SignupForm extends Component {
 
   render() {
 
-    const { onSubmit, onChange } = this;
+    const { handleSubmit, handleChange } = this;
     const { email, firstName, lastName, password } = this.state;
 
     return (
@@ -42,7 +42,7 @@ class SignupForm extends Component {
 
           <p id="signup-lead" className="text-center">Create a free account!</p>
 
-          <form id="signup-form" className="card" onSubmit={onSubmit}>
+          <form id="signup-form" className="card" onSubmit={handleSubmit}>
 
             <div className="form-row">
               <div className="form-group col-md-6">
@@ -50,7 +50,7 @@ class SignupForm extends Component {
                   <input
                     className="form-control"
                     name="firstName"
-                    onChange={onChange}
+                    onChange={handleChange}
                     placeholder="First name..."
                     type="text"
                     value={firstName} />
@@ -62,7 +62,7 @@ class SignupForm extends Component {
                   <input
                     className="form-control"
                     name="lastName"
-                    onChange={onChange}
+                    onChange={handleChange}
                     placeholder="Last name..."
                     type="text"
                     value={lastName} />
@@ -76,7 +76,7 @@ class SignupForm extends Component {
                   <input
                     className="form-control"
                     name="email"
-                    onChange={onChange}
+                    onChange={handleChange}
                     placeholder="Email address..."
                     type="text"
                     value={email} />
@@ -88,7 +88,7 @@ class SignupForm extends Component {
                   <input
                     className="form-control"
                     name="password"
-                    onChange={onChange}
+                    onChange={handleChange}
                     placeholder="Set a password..."
                     type="password"
                     value={password} />
@@ -101,7 +101,7 @@ class SignupForm extends Component {
                 <button
                   className="btn btn-outline-primary btn-md text-center"
                   id="signup-button"
-                  name="signup">Create account</button>
+                  type="submit">Create account</button>
               </div>
             </div>
 
