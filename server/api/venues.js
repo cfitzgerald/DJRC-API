@@ -8,20 +8,20 @@ module.exports = router;
 
 const getSongsFromSpotify = (bar) => {
   return new Promise((resolve, reject) => {
-      if (!bar.owner || !bar.owner.spotifyAccessToken) {
-          return resolve(bar);
-      }
-      let spotifyApi = new SpotifyWebApi();
-      spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
-      spotifyApi.getMyRecentlyPlayedTracks()
-          .then(data => {
-              bar.currentSong = data.items[0].track.name;
-              return resolve(bar);
-          })
-          .catch(err => {
-              console.log('err', err);
-              return resolve(bar);
-          })
+    if (!bar.owner || !bar.owner.spotifyAccessToken) {
+      return resolve(bar);
+    }
+    let spotifyApi = new SpotifyWebApi();
+    spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
+    spotifyApi.getMyRecentlyPlayedTracks()
+      .then(data => {
+        bar.currentSong = data.body.items[0].track.name;
+        return resolve(bar);
+      })
+      .catch(err => {
+        console.log('err', err);
+        return resolve(bar);
+      })
 
   })
 }
@@ -30,34 +30,36 @@ router.get('/', (req, res, next) => {
   Venue.findAll({ include: [{ all: true }] })
     .then(bars => {
       bars = bars.map(bar => {
-          let genres = [];
-          let genreNames = [];
-          bar.genres.forEach(genre => {
-              genres.push(genre.id)
-              genreNames.push(genre.name)
-          })
-          if (bar.Owner) console.log('hello', bar.Owner.spotifyRefreshToken);
-          return {
-              id: bar.id,
-              lat: bar.lat,
-              lon: bar.lon,
-              name: bar.name,
-              address: bar.address,
-              genres: genres,
-              genreNames 
-          }
+        let genres = [];
+        let genreNames = [];
+        bar.genres.forEach(genre => {
+          genres.push(genre.id)
+          genreNames.push(genre.name)
+        })
+        // if (bar.Owner) console.log('hello', bar.Owner.spotifyRefreshToken);
+        return {
+          id: bar.id,
+          lat: bar.lat,
+          lon: bar.lon,
+          name: bar.name,
+          address: bar.address,
+          genres: genres,
+          owner: bar.Owner,
+          genreNames
+        }
       })
       return bars
-      .then(bars => {
-        bars = bars.map(bar => {
-          return getSongsFromSpotify(bar);
-        })
-        return Promise.all(bars)
-      })
-      .then(bars => {
-        res.send(bars)
-      })
     })
+    .then(bars => {
+      bars = bars.map(bar => {
+        return getSongsFromSpotify(bar);
+      })
+      return Promise.all(bars)
+    })
+    .then(bars => {
+      res.send(bars)
+    })
+
     .catch(er => next(er));
 });
 
@@ -83,8 +85,8 @@ router.put('/:id', (req, res, next) => {
   //   .catch(er => next(er))
 
   Venue.updateOwner(req.params.id, req.body.userId)
-  .then(()=> res.sendStatus(200))
-  .catch(er => next(er))
+    .then(() => res.sendStatus(200))
+    .catch(er => next(er))
 });
 
 router.delete('/:id', (req, res, next) => {
