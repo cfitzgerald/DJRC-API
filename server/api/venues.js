@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const db = require('../db/models');
 var SpotifyWebApi = require('spotify-web-api-node');
-const { Venue } = db.models;
+const { Venue, User } = db.models;
 
 
 module.exports = router;
@@ -13,16 +13,26 @@ const getSongsFromSpotify = (bar) => {
     }
     let spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
+    spotifyApi.setRefreshToken(bar.owner.spotifyRefreshToken);
     spotifyApi.getMyRecentlyPlayedTracks()
       .then(data => {
         bar.currentSong = data.body.items[0].track.name;
         return resolve(bar);
       })
       .catch(err => {
-        console.log('err', err);
-        return resolve(bar);
+        spotifyApi.refreshAccessToken()
+          .then(function (data) {
+            spotifyApi.setAccessToken(data.body['access_token']);
+            return User.findById(bar.owner.id)
+            .then(user => {
+              user.spotifyAccessToken = data.body['access_token']
+              user.save();
+            })
+            .then(() => {
+              getSongsFromSpotify(bar);
+            })
+          })
       })
-
   })
 }
 
