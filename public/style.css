@@ -5,14 +5,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/*.dark {
-  color: #fff;
-  background-color: #1a1a1a;
-}*/
-
 .light {
   color: #e66800;
-  /*background-color: #fff;*/
   background-color: #f7f7f7;
 }
 
@@ -20,11 +14,6 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
-
-/*.container {
-  padding-left: 0;
-  padding-right: 0;
-}*/
 
 h1#landing-title {
   color: #ff6763;
@@ -61,8 +50,6 @@ h1#landing-title {
 }
 
 #landing-header {
-  /*background-color: #fff;*/
-  /*background-color: #f7f7f7;*/
   padding-top: 20px;
 }
 
@@ -82,39 +69,23 @@ p#signup-lead {
 
 #landing-body {
   color: #777;
-  /*background-color: #fff;*/
-  /*background-color: #f7f7f7;*/
   font-family: 'Zilla Slab', serif;
   font-size: 1em;
   font-weight: 400;
   padding-top: 10px;
 }
 
-#features {
+.features {
   padding: 10px 0;
 }
 
-#features h4 {
+.features h4 {
   color: #ff6763;
-  /*background-color: #ffcba4;*/
-  /*border-bottom: 1px solid #ff6763;*/
-  font-weight: 400;
-}
-
-#tech {
-  padding: 10px 0;
-}
-
-#tech h4 {
-  color: #ff6763;
-  /*background-color: #ff4554;*/
-  /*border-bottom: 1px solid #ff6763;*/
   font-weight: 400;
 }
 
 #landing-footer {
-  /*background-color: #fff;*/
-  /*background-color: #f7f7f7;*/
+  /*background-color: #808080;*/
 }
 
 #team {

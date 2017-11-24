@@ -20,7 +20,7 @@ const Landing = () => {
 
       <div id="landing-body" className="container">
 
-        <div id="features" className="container">
+        <div className="container features">
           <div className="row">
 
             <div className="col-sm-4">
@@ -40,21 +40,61 @@ const Landing = () => {
 
         <hr className="landing-hr-gray" />
 
-        <div id="tech" className="container">
+        <div className="container features">
           <div className="row">
 
             <div className="col-sm-4">
-              <h4>Technologies/APIs</h4>
+              <h4>The stack...</h4>
             </div>
 
             <div className="col-sm-8">
               <ul className="list-group list-group-flush">
+                <li className="list-group-item">Node.js</li>
+                <li className="list-group-item">Express</li>
                 <li className="list-group-item">React Native</li>
+                <li className="list-group-item">React</li>
+                <li className="list-group-item">Redux</li>
+                <li className="list-group-item">Sequelize + PostgreSQL</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <hr className="landing-hr-gray" />
+
+        <div className="container features">
+          <div className="row">
+
+            <div className="col-sm-4">
+              <h4>The libraries...</h4>
+            </div>
+
+            <div className="col-sm-8">
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">Webpack + Babel</li>
+                <li className="list-group-item">JSON Web Token</li>
+                <li className="list-group-item">Passport</li>
+                <li className="list-group-item">bcrypt</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <hr className="landing-hr-gray" />
+
+        <div className="container features">
+          <div className="row">
+
+            <div className="col-sm-4">
+              <h4>The APIs...</h4>
+            </div>
+
+            <div className="col-sm-8">
+              <ul className="list-group list-group-flush">
                 <li className="list-group-item">Google Maps API</li>
                 <li className="list-group-item">Spotify API</li>
-                <li className="list-group-item">Maybe Gracenote API</li>
-                <li className="list-group-item">Maybe Echo Nest API</li>
-                <li className="list-group-item">...</li>
               </ul>
             </div>
 
