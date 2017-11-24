@@ -11,32 +11,43 @@ const getSongsFromSpotify = (bar) => {
     if (!bar.owner || !bar.owner.spotifyAccessToken) {
       return resolve(bar);
     }
+    // console.log(bar.owner)
     let spotifyApi = new SpotifyWebApi();
     spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
     spotifyApi.setRefreshToken(bar.owner.spotifyRefreshToken);
+    // console.log(bar.owner.spotifyRefreshToken)
     spotifyApi.getMyRecentlyPlayedTracks()
       .then(data => {
+        console.log(data.body.items[0].track.name)
         bar.currentSong = data.body.items[0].track.name;
         return resolve(bar);
       })
       .catch(err => {
-        spotifyApi.refreshAccessToken()
-          .then(function (data) {
-            spotifyApi.setAccessToken(data.body['access_token']);
-            return User.findById(bar.owner.id)
-            .then(user => {
-              user.spotifyAccessToken = data.body['access_token']
-              user.save();
-            })
-            .then(() => {
-              getSongsFromSpotify(bar);
-            })
-          })
+        // console.log(bar);
+        resolve(bar)
+        // console.log('err', err)
+        // spotifyApi.refreshAccessToken()
+        //   .then(function (data) {
+        //     console.log('data', data)
+        //     spotifyApi.setAccessToken(data.body['access_token']);
+        //     return User.findById(bar.owner.id)
+        //     .then(user => {
+        //       user.spotifyAccessToken = data.body['access_token']
+        //       user.save();
+        //     })
+        //     .then(() => {
+        //       getSongsFromSpotify(bar);
+        //     })
+        //   }).catch(err => {
+        //     console.log('spot', err)
+        //     reject(bar);
+        //   })
       })
   })
 }
 
 router.get('/', (req, res, next) => {
+  // console.log('bar');
   Venue.findAll({ include: [{ all: true }] })
     .then(bars => {
       bars = bars.map(bar => {
@@ -67,6 +78,7 @@ router.get('/', (req, res, next) => {
       return Promise.all(bars)
     })
     .then(bars => {
+      console.log(bars);
       res.send(bars)
     })
 
