@@ -2,6 +2,19 @@ const db = require('../db/models');
 var SpotifyWebApi = require('spotify-web-api-node');
 const { User } = db.models;
 
+const getSongs = (data, bar) => {
+    if (!data) return bar;
+    const songs = [];
+    data.body.items.forEach(song => {
+        const track = {};
+        track.artist = song.track.artists[0].name;
+        track.song = song.track.name;
+        songs.push(track);
+    })
+    bar.songs = songs;
+    return bar;
+}
+
 const getSongsFromSpotify = (bar) => {
     return new Promise((resolve) => {
         //check if bar has an owner
@@ -20,10 +33,8 @@ const getSongsFromSpotify = (bar) => {
 
         spotifyApi.getMyRecentlyPlayedTracks()
             .then(data => {
-                bar.currentSong = data.body.items[0].track.name;
-                return resolve(bar);
+                resolve(getSongs(data, bar));
             })
-
             .catch(err => {
                 //check to see if its a webapierror
                 if (err.name !== 'WebapiError') resolve(bar);
@@ -41,8 +52,10 @@ const getSongsFromSpotify = (bar) => {
                                     //get songs with new accesstoken
                                     spotifyApi.getMyRecentlyPlayedTracks()
                                         .then(data => {
-                                            bar.currentSong = data.body.items[0].track.name;
-                                            return resolve(bar);
+                                            resolve(getSongs(data, bar));
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
                                         })
                                 })
                         })
