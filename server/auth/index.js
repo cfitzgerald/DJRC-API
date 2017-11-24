@@ -19,19 +19,24 @@ passport.use(new LocalStrategy({
     session: false
 },
     function (username, password, done) {
+        console.log('un, pw', username, password)
         User.findOne({
             where: {
                 email: username
             }
         })
             .then(user => {
+                
                 if (!user) {
                     done(null, false);
                 }
                 if (user) {
+                    console.log('user', user)
                     //for some reason user.validate password wasn't working
                     bcrypt.compare(password, user.password)
                         .then(res => {
+                            console.log(password, user.password)                    
+                            console.log(res);
                             if (!res) {
                                 return done(null);
                             }
@@ -41,6 +46,7 @@ passport.use(new LocalStrategy({
                         })
                 }
             }).catch(err => {
+                console.log('err', err)
                 done(err);
             })
     }
@@ -85,6 +91,7 @@ passport.use(new SpotifyStrategy({
         .then(user => {
             user.email = profile._json.email;
             user.spotifyAccessToken = accessToken;
+            user.isBusiness = false;
             return user.save();
         })
         .then(user => {

@@ -103,7 +103,7 @@ const User = db.define('user', {
     }
   });
 
-User.beforeSave(saltPassword);
+User.beforeCreate(saltPassword);
 
 User.findBySessionId = function (id) {
   // if (!id){

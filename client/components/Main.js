@@ -5,14 +5,9 @@ import { connect } from 'react-redux';
 // components
 import Landing from './Landing';
 import Spotify from './Spotify';
-import WebAdmin from './WebAdmin'
-// import Navbar from './Navbar';
+import WebAdmin from './WebAdmin';
 
 class Main extends Component {
-
-  componentDidMount() {
-    // console.log('componentDidMount: Main');
-  }
 
   render() {
     return (
@@ -34,7 +29,7 @@ const mapStateToProps = () => {
   };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return {
   };
 };
