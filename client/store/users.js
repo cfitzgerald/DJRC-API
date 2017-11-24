@@ -23,7 +23,7 @@ export function fetchUsers(){
 
 export function deleteUser(id){
   return (dispatch) => {
-    return axios.delete(`api/user/${id}`)
+    return axios.delete(`api/users/${id}`)
     .then(() => {
       dispatch(fetchUsers());
     });

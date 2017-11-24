@@ -2,7 +2,6 @@ const router = require('express').Router();
 const db = require('../db/models');
 const { Venue } = db.models;
 
-
 module.exports = router;
 
 router.get('/', (req, res, next) => {
@@ -22,7 +21,7 @@ router.get('/', (req, res, next) => {
               name: bar.name,
               address: bar.address,
               genres: genres,
-              genreNames 
+              genreNames
           }
       })
       res.send(bars)
@@ -33,16 +32,16 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Venue.findById(req.params.id)
     .then(venue => res.send(venue))
-    .catch(er => next(er));
+    .catch(next);
 });
 
 router.post('/', (req, res, next) => {
   Venue.create(req.body)
     .then(() => {
       return Venue.findAll()
-        .then(venues => res.send(venues))
+        .then(venues => res.send(venues));
     })
-    .catch(er => next(er));
+    .catch(next);
 });
 
 router.put('/:id', (req, res, next) => {
@@ -51,15 +50,15 @@ router.put('/:id', (req, res, next) => {
   //   .catch(er => next(er))
 
   Venue.updateOwner(req.params.id, req.body.userId)
-  .then(()=> res.sendStatus(200))
-  .catch(er => next(er))
+  .then(() => res.sendStatus(200))
+  .catch(next);
 });
 
 router.delete('/:id', (req, res, next) => {
   Venue.destroy({ where: { id: req.params.id } })
     .then(venue => {
       return Venue.findAll()
-        .then(venues => res.send(venues))
+        .then(venues => res.send(venues));
     })
-    .catch(er => next(er));
+    .catch(next);
 });
