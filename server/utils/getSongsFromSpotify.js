@@ -48,7 +48,7 @@ const getSongsFromSpotify = (bar) => {
                         })
 
                         .catch(err => {
-                            console.log('spot', err)
+                            console.log('spotify', err)
                         })
                 }
             })

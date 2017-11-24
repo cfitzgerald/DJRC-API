@@ -11,7 +11,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    console.log('hello');
     User.create({
         email: req.body.email,
         password: req.body.password
@@ -21,10 +20,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-    console.log('credentials', req.body);
     passport.authenticate('local', (err, user) => {
-        console.log('err',err)
-        console.log('userLogin',user)
         if (err) next(err);
         if (!user) {
             res.status(401).json({ error: 'Invalid credentials.' });

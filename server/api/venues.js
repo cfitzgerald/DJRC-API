@@ -7,7 +7,6 @@ const { Venue, User } = db.models;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  console.log('bar');
   Venue.findAll({ include: [{ all: true }] })
     .then(bars => {
       bars = bars.map(bar => {
