@@ -58,6 +58,7 @@ p#landing-lead {
   font-family: 'Zilla Slab', serif;
   font-size: 1.25em;
   font-weight: 400;
+  margin: 20px 0;
 }
 
 p#signup-lead {

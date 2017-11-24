@@ -9,7 +9,7 @@ const Landing = () => {
 
         <div className="col-sm-12">
           <h1 id="landing-title">BarCast</h1>
-          <p id="landing-lead">A curated suggestion engine to find local bars playing the genre of music you want to hear right now.</p>
+          <p id="landing-lead">A curated suggestion app for finding bars near you playing the genre of music you want to hear right now.</p>
         </div>
 
         <hr className="landing-hr-yellow" />
@@ -23,15 +23,15 @@ const Landing = () => {
         <div className="container features">
           <div className="row">
 
-            <div className="col-sm-4">
-              <h4>Why use it...</h4>
+            <div className="col-sm-3">
+              <h4>The <strong>App</strong>...</h4>
             </div>
 
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">We've got so many venues!</li>
-                <li className="list-group-item">For users...</li>
-                <li className="list-group-item">For venue owners...</li>
+                <li className="list-group-item">Find out what's playing at <strong>375+</strong> local bars!</li>
+                <li className="list-group-item"><p>Already out on the town and looking for a bar with a particular vibe? BarCast wants to help you answer the question: <em>"Where to next?"</em></p> <p>Start by picking a music genre that fits <em>your</em> vibe right now, and get a map view of bars near you playing songs from that genre. Check out the bar's profile for more info, and then get walking directions from your current location.</p></li>
+                <li className="list-group-item"><p>Own or manage a bar?</p> <p>Create and verify a free BarCast account, link to the Spotify account you use for playing music at the bar, and attract new customers to your bar!</p></li>
               </ul>
             </div>
 
@@ -43,11 +43,11 @@ const Landing = () => {
         <div className="container features">
           <div className="row">
 
-            <div className="col-sm-4">
-              <h4>The stack...</h4>
+            <div className="col-sm-3">
+              <h4>The <strong>Stack</strong>...</h4>
             </div>
 
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Node.js</li>
                 <li className="list-group-item">Express</li>
@@ -66,11 +66,11 @@ const Landing = () => {
         <div className="container features">
           <div className="row">
 
-            <div className="col-sm-4">
-              <h4>The libraries...</h4>
+            <div className="col-sm-3">
+              <h4>The <strong>Libraries</strong>...</h4>
             </div>
 
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Webpack + Babel</li>
                 <li className="list-group-item">JSON Web Token</li>
@@ -87,11 +87,11 @@ const Landing = () => {
         <div className="container features">
           <div className="row">
 
-            <div className="col-sm-4">
-              <h4>The APIs...</h4>
+            <div className="col-sm-3">
+              <h4>The <strong>APIs</strong>...</h4>
             </div>
 
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Google Maps API</li>
                 <li className="list-group-item">Spotify API</li>
