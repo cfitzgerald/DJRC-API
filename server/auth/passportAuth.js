@@ -52,13 +52,13 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
         spotifyApi.setAccessToken(req.user.spotifyAccessToken)
         spotifyApi.getMyRecentlyPlayedTracks()
             .then(data => {
-                const songs = [];
-                data.body.items.forEach(song => {
-                    const track = {};
-                    track.artist = song.track.artists[0].name;
-                    track.song = song.track.name;
-                    songs.push(track);
-                })
+            const songs = [];
+            data.body.items.forEach(song => {
+                const track = {};
+                track.artist = song.track.artists[0].name;
+                track.song = song.track.name;
+                songs.push(track);
+            })
                 res.redirect(`exp://ru-ex3.jdb409.djrc-native.exp.direct:80/+token=${token}`);
             }).catch(err => {
                 console.log(err)
