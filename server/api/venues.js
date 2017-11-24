@@ -23,9 +23,12 @@ const getSongsFromSpotify = (bar) => {
         return resolve(bar);
       })
       .catch(err => {
+        console.log(err);
         // console.log(bar);
         resolve(bar)
         // console.log('err', err)
+        // spotifyApi.setAccessToken('BQCcpGzScFxbntfrPDYG-K_kYnyqVE5rvlmbfS3rVHAWQktjdp85fIQtI0FwOkRsRKfqYxO_X8QYiZPhQf8aPOAc75yyLGBPLOYwHGUMIl-PicPAPyl1peU4xdFIlt9nby6CpEnIfZrKjbKHzqJCOQWxjk_hEk1udK4ELZDr');
+        // spotifyApi.setRefreshToken(bar.owner.spotifyRefreshToken);
         // spotifyApi.refreshAccessToken()
         //   .then(function (data) {
         //     console.log('data', data)
@@ -36,12 +39,12 @@ const getSongsFromSpotify = (bar) => {
         //       user.save();
         //     })
         //     .then(() => {
-        //       getSongsFromSpotify(bar);
-        //     })
-        //   }).catch(err => {
-        //     console.log('spot', err)
-        //     reject(bar);
-        //   })
+              // getSongsFromSpotify(bar);
+            // })
+          // }).catch(err => {
+            // console.log('spot', err)
+            // reject(bar);
+          // })
       })
   })
 }
@@ -78,7 +81,6 @@ router.get('/', (req, res, next) => {
       return Promise.all(bars)
     })
     .then(bars => {
-      console.log(bars);
       res.send(bars)
     })
 
