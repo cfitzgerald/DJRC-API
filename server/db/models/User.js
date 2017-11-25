@@ -71,7 +71,8 @@ const User = db.define('user', {
   //   defaultValue: false
   // },
   isBusiness: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   vibe: {
     type: Sequelize.STRING

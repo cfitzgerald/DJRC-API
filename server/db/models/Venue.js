@@ -45,4 +45,12 @@ Venue.updateOwner = function(venueId, userId){
     })
 }
 
+Venue.getOwner = function(userId){
+    Venue.findOne({
+        where: {
+            OwnerId: userId
+        }
+    })
+}
+
 module.exports = Venue;

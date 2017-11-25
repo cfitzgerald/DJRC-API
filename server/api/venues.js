@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const db = require('../db/models');
 const { Venue } = db.models;
-<<<<<<< HEAD
+
 const Sequelize = require('Sequelize');
-=======
->>>>>>> master
+
 
 module.exports = router;
 
@@ -18,7 +17,7 @@ router.get('/', (req, res, next) => {
           bars = bars.filter(bar => {
             return latitude-0.0025<bar.lat && latitude+0.0025>bar.lat && longitude-0.0025<bar.lon && longitude+0.0025>bar.lon
           })
-<<<<<<< HEAD
+
         }
         bars = bars.map(bar => {
             let genres = [];
@@ -38,7 +37,7 @@ router.get('/', (req, res, next) => {
             }
         })
         res.send(bars)
-=======
+
           return {
               id: bar.id,
               lat: bar.lat,
@@ -48,7 +47,6 @@ router.get('/', (req, res, next) => {
               genres: genres,
               genreNames
           }
->>>>>>> master
       })
       .catch(er => next(er));
 });
@@ -58,6 +56,12 @@ router.get('/:id', (req, res, next) => {
     .then(venue => res.send(venue))
     .catch(next);
 });
+
+router.get('/owner/:id', (req, res, next) => {
+  Venue.getOwner(req.params.id)
+    .then(venue => res.send(venue))
+    .catch(next);
+})
 
 router.post('/', (req, res, next) => {
   Venue.create(req.body)
