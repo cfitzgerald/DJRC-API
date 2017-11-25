@@ -30,19 +30,21 @@ const Venue = db.define('venue', {
 });
 
 Venue.updateOwner = function(venueId, userId){
-    Venue.findById(venueId)
-    .then((venue) => {
+    // Venue.findById(venueId)
+    // .then((venue) => {
 
-        venue.setOwner(userId)
-        return venue.save()
-    })
-    .then(() => {
+    //     venue.setUser(userId)
+    //     return venue.save()
+    // })
+    // .then(() => {
         User.findById(userId)
         .then((user) => {
+            user.setVenue(venueId);
             user.isBusiness = true;
             return user.save();
         })
-    })
+        .catch(console.log('ay'));
+    // })
 }
 
 Venue.getOwner = function(userId){
