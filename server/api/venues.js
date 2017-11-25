@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const SpotifyWebApi = require('spotify-web-api-node');
+
 const db = require('../db/models');
 
 const getSongsFromSpotify = require('../utils/getSongsFromSpotify');
-const { Venue, User } = db.models;
+const { Venue } = db.models;
 
-const Sequelize = require('Sequelize');
 
 
 module.exports = router;
