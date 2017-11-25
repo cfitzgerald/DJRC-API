@@ -11,7 +11,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    console.log('hello');
     User.create({
         email: req.body.email,
         password: req.body.password
@@ -21,10 +20,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/login', (req, res, next) => {
-    console.log('credentials', req.body);
     passport.authenticate('local', (err, user) => {
-        console.log('err',err)
-        console.log('userLogin',user)
         if (err) next(err);
         if (!user) {
             res.status(401).json({ error: 'Invalid credentials.' });
@@ -56,13 +52,13 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
         spotifyApi.setAccessToken(req.user.spotifyAccessToken)
         spotifyApi.getMyRecentlyPlayedTracks()
             .then(data => {
-                const songs = [];
-                data.body.items.forEach(song => {
-                    const track = {};
-                    track.artist = song.track.artists[0].name;
-                    track.song = song.track.name;
-                    songs.push(track);
-                })
+            const songs = [];
+            data.body.items.forEach(song => {
+                const track = {};
+                track.artist = song.track.artists[0].name;
+                track.song = song.track.name;
+                songs.push(track);
+            })
                 res.redirect(`exp://ru-ex3.jdb409.djrc-native.exp.direct:80/+token=${token}`);
             }).catch(err => {
                 console.log(err)
