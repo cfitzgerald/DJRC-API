@@ -6,6 +6,7 @@ const { User, Song } = db.models;
 const getSongs = (data, bar) => {
     if (!data) return bar;
     const songs = [];
+    console.log(data.body.items[0]);
     data.body.items.forEach(song => {
         const track = {};
         track.artist = song.track.artists[0].name;
