@@ -11,8 +11,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
+  let user;
   User.findById(req.params.id)
-    .then(user => res.send(user))
+    .then((_user) => {
+      user = _user;
+      user.getVenue()
+        .then(venue => res.send({user, venue}))
+        .catch(next);
+      })
     .catch(next);
 });
 

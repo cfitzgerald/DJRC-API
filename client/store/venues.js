@@ -22,9 +22,16 @@ export function fetchVenues() {
 }
 
 export function updateOwner (venueId, userId) {
-    return axios.put(`/api/venues/${venueId}`,  { userId } )
+    return axios.put(`/api/venues/owner/${venueId}`,  { userId } )
     .then(res => res.data)
     // .then(() => dispatch(fetchVenues()))
+}
+
+
+
+export function getOwner(userId){
+  return axios.get(`/api/venues/owner/${userId}`)
+  .then(res => res.data)
 }
 
 export function deleteVenue(id) {

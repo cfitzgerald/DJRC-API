@@ -7,6 +7,7 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { User } = db.models;
+const { Venue } = db.models;
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
@@ -25,7 +26,7 @@ passport.use(new LocalStrategy({
             }
         })
             .then(user => {
-                
+
                 if (!user) {
                     done(null, false);
                 }
@@ -56,7 +57,9 @@ passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
     User.findOne({
         where: {
             id: load
-        }
+            },
+            include: [{ all: true }]
+
     })
         .then(user => {
             if (user) {
