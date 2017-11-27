@@ -22,23 +22,6 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-
-// router.post('/updateVenue/:id', (req, res, next) => {
-//   User.findById(req.params.id)
-//     .then((user) => {
-//       console.log('user made it');
-//       user.getVenue()
-//         .then(venue => {
-//           user.venues = venue
-//           console.log('UPDATE USER', user)
-//           console.log('UPDATE VENUE', venue)
-//           return user.save()
-//         })
-//         .catch(console.log('err'))
-//     })
-//     .catch(next)
-// })
-
 router.post('/', (req, res, next) => {
   User.create(req.body)
     .then(user => res.status(200).send(user))

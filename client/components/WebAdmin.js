@@ -71,7 +71,6 @@ class WebAdmin extends Component {
 
                       this.props.updateOwner(bar.id, this.state.userId)}}
                       >
-
                       <select onChange={ onChangeHandler }>
 
 
