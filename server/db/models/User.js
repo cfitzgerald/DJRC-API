@@ -88,6 +88,9 @@ const User = db.define('user', {
   },
   spotifyAccessToken: {
     type: Sequelize.STRING
+  },
+  spotifyRefreshToken: {
+    type: Sequelize.STRING
   }
 }, {
     getterMethods: {

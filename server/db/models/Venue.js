@@ -43,16 +43,17 @@ Venue.updateOwner = function(venueId, userId){
             user.isBusiness = true;
             return user.save();
         })
-        .catch(console.log('ay'));
+
     // })
 }
 
-Venue.getOwner = function(userId){
-    Venue.findOne({
-        where: {
-            OwnerId: userId
-        }
-    })
+Venue.updateGenres = function(venueId, genreArr){
+    Venue.findById(venueId)
+        .then((venue) => {
+            venue.setGenres(genreArr);
+            return venue.save();
+        })
 }
+
 
 module.exports = Venue;
