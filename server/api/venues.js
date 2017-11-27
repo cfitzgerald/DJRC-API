@@ -13,8 +13,6 @@ const { Venue } = db.models;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-
-
   let arr = req.query.currentLocation ? req.query.currentLocation.split(',') : undefined;
   let latitude = arr ? arr[0].slice(arr[0].indexOf(':') + 1, arr[0].length) * 1 : undefined;
   let longitude = arr && arr[1] ? arr[1].slice(arr[1].indexOf(':') + 1, arr[1].length - 1) * 1 : undefined

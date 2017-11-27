@@ -1,6 +1,7 @@
 const db = require('../db/models');
 var SpotifyWebApi = require('spotify-web-api-node');
-const { User } = db.models;
+const { User, Song } = db.models;
+
 
 const getSongs = (data, bar) => {
     if (!data) return bar;
@@ -10,6 +11,20 @@ const getSongs = (data, bar) => {
         track.artist = song.track.artists[0].name;
         track.song = song.track.name;
         songs.push(track);
+        Song.findOne({
+            where: {
+                track: track.song,
+                userId: bar.owner.id
+            }
+        })
+            .then(song => {
+                if (song) return;
+                Song.create({
+                    artist: track.artist,
+                    track: track.song,
+                    userId: bar.owner.id
+                })
+            })
     })
     bar.songs = songs;
     return bar;
@@ -30,6 +45,8 @@ const getSongsFromSpotify = (bar) => {
 
         spotifyApi.setAccessToken(bar.owner.spotifyAccessToken);
         spotifyApi.setRefreshToken(bar.owner.spotifyRefreshToken);
+
+
 
         spotifyApi.getMyRecentlyPlayedTracks()
             .then(data => {
@@ -65,6 +82,7 @@ const getSongsFromSpotify = (bar) => {
                         })
                 }
             })
+
 
     })
 }
