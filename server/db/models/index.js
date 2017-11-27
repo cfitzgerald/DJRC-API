@@ -21,6 +21,7 @@ module.exports = {sync,
     Genre,
     User,
     Venue,
-    Promo
+    Promo,
+    Song
   }
 };
