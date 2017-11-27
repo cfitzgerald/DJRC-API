@@ -6,11 +6,13 @@ const getSongsFromSpotify = require('../utils/getSongsFromSpotify');
 const { Venue } = db.models;
 
 
+// const Sequelize = require('Sequelize');
+
+
 
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  console.log('adfa')
   let arr = req.query.currentLocation ? req.query.currentLocation.split(',') : undefined;
   let latitude = arr ? arr[0].slice(arr[0].indexOf(':') + 1, arr[0].length) * 1 : undefined;
   let longitude = arr && arr[1] ? arr[1].slice(arr[1].indexOf(':') + 1, arr[1].length - 1) * 1 : undefined
@@ -39,6 +41,7 @@ router.get('/', (req, res, next) => {
           owner: bar.Owner,
           genreNames
         }
+
       })
       return bars
     })
@@ -61,6 +64,17 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/owner/:id', (req, res, next) => {
+
+  Venue.findOne({
+    where: {
+      userId: req.params.id
+    }
+  })
+    .then(venue => res.send(venue))
+    .catch(next);
+})
+
 router.post('/', (req, res, next) => {
   Venue.create(req.body)
     .then(() => {
@@ -71,9 +85,14 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  // Venue.update(req.body, { where: { id: req.params.id } })
-  //   .then(venue => res.send(venue))
-  //   .catch(er => next(er))
+
+  Venue.updateGenres(req.params.id, req.body)
+    .then(() => res.sendStatus(200))
+    .catch(next);
+});
+
+router.put('/owner/:id', (req, res, next) => {
+
 
   Venue.updateOwner(req.params.id, req.body.userId)
     .then(() => res.sendStatus(200))
