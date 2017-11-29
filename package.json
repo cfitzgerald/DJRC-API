@@ -6,7 +6,7 @@
   "devDependencies": {},
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run webpack & npm run seed",
+    "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
     
     "test": "echo \"Error: no test specified\" && exit 1",

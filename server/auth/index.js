@@ -84,6 +84,7 @@ passport.use(new SpotifyStrategy({
         }
     })
         .then(user => {
+            console.log(user);
             return user ? user :
                 User.create({ spotifyId: profile.id })
         })
