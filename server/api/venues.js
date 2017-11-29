@@ -24,32 +24,31 @@ router.get('/', (req, res, next) => {
         })
 
       }
-      console.log('bar', bars);
       bars = bars.map(bar => {
-        if (bar.id === 265)console.log('harry', bar);
-        let genres = [];
-        let genreNames = [];
-        bar.genres.forEach(genre => {
-          genres.push(genre.id)
-          genreNames.push(genre.name)
-        })
-        return {
-          id: bar.id,
-          lat: bar.lat,
-          lon: bar.lon,
-          name: bar.name,
-          address: bar.address,
-          genres: genres,
-          owner: bar.User,
-          genreNames
-        }
-
+        return bar.getUser()
+          .then(user => {
+            let genres = [];
+            let genreNames = [];
+            bar.genres.forEach(genre => {
+              genres.push(genre.id)
+              genreNames.push(genre.name)
+            })
+            return {
+              id: bar.id,
+              lat: bar.lat,
+              lon: bar.lon,
+              name: bar.name,
+              address: bar.address,
+              genres: genres,
+              owner: user,
+              genreNames
+            }
+          })
       })
-      return bars
+      return Promise.all(bars)
     })
     .then(bars => {
       bars = bars.map(bar => {
-      console.log('bar', bar.owner);
         return getSongsFromSpotify(bar);
       })
       return Promise.all(bars)
