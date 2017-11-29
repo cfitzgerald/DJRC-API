@@ -59,7 +59,7 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
                 track.song = song.track.name;
                 songs.push(track);
             })
-                res.redirect(`exp://ty-nrq.jdb409.djrc-native.exp.direct:80/+token=${token}`);
+                res.redirect(`exp://p8-8fk.jdb409.djrc-native.exp.direct:80/+token=${token}`);
             }).catch(err => {
                 console.log(err)
             })
