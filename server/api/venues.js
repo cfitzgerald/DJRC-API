@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
         })
 
       }
-      console.log(' ar');
+      console.log('bar', bars[0]);
       bars = bars.map(bar => {
         let genres = [];
         let genreNames = [];
@@ -39,7 +39,7 @@ router.get('/', (req, res, next) => {
           name: bar.name,
           address: bar.address,
           genres: genres,
-          owner: bar.Owner,
+          owner: bar.User,
           genreNames
         }
 
