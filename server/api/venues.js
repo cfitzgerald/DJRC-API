@@ -24,8 +24,9 @@ router.get('/', (req, res, next) => {
         })
 
       }
-      console.log('bar', bars[0]);
+      console.log('bar', bars);
       bars = bars.map(bar => {
+        if (bar.id === 265)console.log('harry', bar);
         let genres = [];
         let genreNames = [];
         bar.genres.forEach(genre => {
