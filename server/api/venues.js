@@ -47,7 +47,7 @@ router.get('/', (req, res, next) => {
     })
     .then(bars => {
       bars = bars.map(bar => {
-        if (bar.owner) console.log(bar.owner);
+        if (bar.owner) console.log('bar', bar.owner);
         return getSongsFromSpotify(bar);
       })
       return Promise.all(bars)
