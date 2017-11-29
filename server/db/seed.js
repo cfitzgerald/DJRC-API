@@ -83,7 +83,7 @@ Venue.create({ name: 'Pier A Harbor House', address: '22 Battery Pl', lat: '40.7
 
     for (var i = 0; i < venues.length; i++){
       let shuffleGenres = shuffle(genres);
-      venues[i].setGenres([shuffleGenres[0], shuffleGenres[1]]);
+      venues[i].setGenres([shuffleGenres[0]]);
     }
     })
   })
