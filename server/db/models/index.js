@@ -15,6 +15,9 @@ User.belongsToMany(Venue, { through: 'favorite' });
 User.hasOne(Venue)
 Song.belongsTo(User);
 
+Promo.belongsTo(Venue);
+Venue.hasMany(Promo);
+
 const sync = () => db.sync();
 
 module.exports = {sync,

@@ -29,6 +29,7 @@ export function updateOwner (venueId, userId) {
 
 
 
+
 export function getOwner(userId){
   return axios.get(`/api/venues/owner/${userId}`)
   .then(res => res.data)

@@ -27,9 +27,13 @@ router.get('/', (req, res, next) => {
       bars = bars.map(bar => {
         let genres = [];
         let genreNames = [];
+        let promos = [];
         bar.genres.forEach(genre => {
           genres.push(genre.id)
           genreNames.push(genre.name)
+        })
+        bar.promos.forEach(promo => {
+          promos.push(promo.description)
         })
         return {
           id: bar.id,
@@ -39,7 +43,8 @@ router.get('/', (req, res, next) => {
           address: bar.address,
           genres: genres,
           owner: bar.Owner,
-          genreNames
+          genreNames,
+          promos
         }
 
       })
