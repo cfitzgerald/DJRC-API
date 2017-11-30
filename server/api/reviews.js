@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:barId', (req, res, next) => {
+    console.log(req.body)
     Review.create(req.body)
         .then(reviews => {
             res.send(reviews);
