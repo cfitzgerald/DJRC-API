@@ -4,6 +4,7 @@ const Venue = require('./Venue');
 const Genre = require('./Genre');
 const Promo = require('./Promo');
 const Song = require('./Song');
+const Review = require('./Review');
 
 Venue.belongsToMany(Genre, { through: 'genreVenue' });
 Genre.belongsToMany(Venue, { through: 'genreVenue' });
@@ -11,7 +12,12 @@ Genre.belongsToMany(Venue, { through: 'genreVenue' });
 Venue.belongsToMany(User, { through: 'favorite' });
 User.belongsToMany(Venue, { through: 'favorite' });
 
+<<<<<<< HEAD
+Review.belongsTo(User)
+Review.belongsTo(Venue)
+=======
 Venue.belongsTo(User)
+>>>>>>> master
 
 Song.belongsTo(User);
 
@@ -23,6 +29,7 @@ module.exports = {sync,
     User,
     Venue,
     Promo,
-    Song
+    Song,
+    Review
   }
 };
