@@ -77,7 +77,7 @@ class WebAdmin extends Component {
                         {
                           users.map( user => {
                             return(
-                              <option key= {user.id} value={user.id}> {user.id} - {user.fullName} </option>
+                              <option key= {user.id} value={user.id}> {user.id} - {user.email} </option>
                             )
                           })
                         }
