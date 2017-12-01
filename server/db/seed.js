@@ -1,4 +1,3 @@
-// var service = new google.maps.places.PlacesServices(document.createElement('div'));
 
 const db = require('./models/db');
 const {Genre, Promo, User, Venue } = require('./models/index').models;
