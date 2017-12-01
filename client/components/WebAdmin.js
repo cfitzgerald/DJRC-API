@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchVenues, fetchUsers, updateOwner } from '../store';
+import { fetchVenues, fetchUsers, updateOwner, addPromo } from '../store';
 
 class WebAdmin extends Component {
   constructor(){
@@ -60,6 +60,8 @@ class WebAdmin extends Component {
         </thead>
         <tbody>
 
+
+
           {
             filteredVenues.map( bar => {
               return (
@@ -112,7 +114,8 @@ const mapDispatch = (dispatch) => {
         fetchUsers: () => {
           dispatch(fetchUsers());
         },
-        updateOwner
+        updateOwner,
+        addPromo
     }
 }
 
