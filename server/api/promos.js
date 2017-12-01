@@ -14,7 +14,6 @@ router.get('/', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
   let promo;
   let curPromos = [];
-  console.log(req.body);
   Promo.create(req.body)
     .then(_promo => {
       promo = _promo;
