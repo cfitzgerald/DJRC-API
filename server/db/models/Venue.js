@@ -26,6 +26,9 @@ const Venue = db.define('venue', {
     },
     lon: {
         type: Sequelize.FLOAT
+    },
+    avgRating: {
+        type: Sequelize.STRING
     }
 });
 

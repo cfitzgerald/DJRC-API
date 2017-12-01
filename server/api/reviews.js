@@ -1,6 +1,7 @@
 const express = require('express');
-const db = require('../db/models/');
-const { Venue, Review } = db;
+const Review = require('../db/models/Review');
+const Venue = require('../db/models/Venue');
+// const { Venue } = db;
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -11,29 +12,32 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:barId', (req, res, next) => {
-    console.log('bar')
+    console.log(req.body)
     Review.create(req.body)
         .then(review => {
-            console.log('ereaer', review);
-            return Promise.all([Review.findAll({
+            // console.log('ereaer', review);
+            return Review.findAll({
                 where: {
                     venueId: req.params.barId
                 }
-            }),
-            Venue.findById(req.params.barId)]
-            )
-                .then(([reviews, venue]) => {
-                    let avg = 0;
-                    reviews.forEach(review => {
-                        avg += Number(review.rating);
-                    })
-                    avg = avg / reviews.length;
-                    console.log(avg);
-                    venue.avgRating = avg;
-                    venue.save()
-                        .then(() => {
-                            res.send(review);
+            })
+                .then((reviews) => {
+                    return Venue.findById(req.params.barId * 1)
+                        .then(venue => {
+                            console.log('venue', venue)
+                            let avg = 0;
+                            reviews.forEach(review => {
+                                avg += Number(review.rating);
+                            })
+                            avg = avg / reviews.length;
+                            console.log(avg);
+                            venue.avgRating = avg;
+                            venue.save()
+                                .then(() => {
+                                    res.send(review);
+                                })
                         })
+
 
                 })
         })
