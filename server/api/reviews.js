@@ -11,6 +11,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:barId', (req, res, next) => {
+    console.log('bar')
     Review.create(req.body)
         .then(review => {
             return Promise.all([Review.findAll({
@@ -26,6 +27,7 @@ router.post('/:barId', (req, res, next) => {
                         avg += Number(review.rating);
                     })
                     avg = avg / reviews.length;
+                    console.log(avg);
                     venue.avgRating = avg;
                     venue.save()
                         .then(() => {
