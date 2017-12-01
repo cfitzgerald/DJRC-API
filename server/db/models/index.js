@@ -1,3 +1,4 @@
+
 const db = require('./db');
 const User = require('./User');
 const Venue = require('./Venue');
@@ -12,12 +13,9 @@ Genre.belongsToMany(Venue, { through: 'genreVenue' });
 Venue.belongsToMany(User, { through: 'favorite' });
 User.belongsToMany(Venue, { through: 'favorite' });
 
-<<<<<<< HEAD
 Review.belongsTo(User)
 Review.belongsTo(Venue)
-=======
 Venue.belongsTo(User)
->>>>>>> master
 
 Song.belongsTo(User);
 
