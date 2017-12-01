@@ -12,34 +12,27 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/:barId', (req, res, next) => {
-    console.log(req.body)
     Review.create(req.body)
         .then(review => {
-            // console.log('ereaer', review);
-            return Review.findAll({
+            return Promise.all([Review.findAll({
                 where: {
                     venueId: req.params.barId
                 }
-            })
-                .then((reviews) => {
-                    return Venue.findById(req.params.barId * 1)
-                        .then(venue => {
-                            console.log('venue', venue)
-                            let avg = 0;
-                            reviews.forEach(review => {
-                                avg += Number(review.rating);
-                            })
-                            avg = avg / reviews.length;
-                            console.log(avg);
-                            venue.avgRating = avg;
-                            venue.save()
-                                .then(() => {
-                                    res.send(review);
-                                })
+            }), Venue.findById(req.params.barId * 1)])
+                .then(([reviews, venue]) => {
+                    let avg = 0;
+                    reviews.forEach(review => {
+                        avg += Number(review.rating);
+                    })
+                    avg = avg / reviews.length;
+                    venue.avgRating = avg;
+                    venue.save()
+                        .then(() => {
+                            res.send(review);
                         })
-
-
                 })
+
+
         })
 })
 

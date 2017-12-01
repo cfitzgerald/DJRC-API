@@ -54,6 +54,7 @@ router.get('/', (req, res, next) => {
       return Promise.all(bars)
     })
     .then(bars => {
+      console.log(bars.length)
       res.send(bars)
     })
 
