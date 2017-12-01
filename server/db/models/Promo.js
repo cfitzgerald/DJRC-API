@@ -2,11 +2,8 @@ const db = require('./db');
 const Sequelize = db.Sequelize;
 
 const Promo = db.define('promo', {
-    name: {
+    description: {
         type: Sequelize.STRING
-    },
-    expiration: {
-        type: Sequelize.DATE
     }
 });
 
