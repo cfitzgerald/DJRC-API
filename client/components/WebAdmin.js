@@ -51,9 +51,6 @@ class WebAdmin extends Component {
           className='form-control'
          />
        </form>
-       <button onClick = { ()=> {this.props.addPromo(5)}}>
-          Wee
-        </button>
        <table className="table">
         <thead>
           <tr>
