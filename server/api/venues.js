@@ -13,16 +13,17 @@ const { Venue } = db.models;
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  let {latitude, longitude} = req.query;
-  latitude *=1 ;
-  longitude *=1 ;
+  let {latitude, longitude, radius} = req.query;
+  latitude *= 1;
+  longitude *= 1;
+  radius *= 1;
+  radius = radius ? radius : 0.008;
   Venue.findAll({ include: [{ all: true }] })
     .then(bars => {
       if (latitude && longitude) {
         bars = bars.filter(bar => {
-          return latitude - 0.008 < bar.lat && latitude + 0.008 > bar.lat && longitude - 0.008 < bar.lon && longitude + 0.008 > bar.lon
+          return latitude - radius < bar.lat && latitude + radius > bar.lat && longitude - radius < bar.lon && longitude + radius > bar.lon
         })
-
       }
       bars = bars.map(bar => {
         return bar.getUser()
