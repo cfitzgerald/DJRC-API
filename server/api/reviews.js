@@ -14,6 +14,7 @@ router.post('/:barId', (req, res, next) => {
     console.log('bar')
     Review.create(req.body)
         .then(review => {
+            console.log('ereaer', review);
             return Promise.all([Review.findAll({
                 where: {
                     venueId: req.params.barId
