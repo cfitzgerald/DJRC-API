@@ -47,6 +47,7 @@ router.get('/', (req, res, next) => {
               address: bar.address,
               genres: genres,
               owner: user,
+              avgRating: bar.avgRating,
               genreNames,
               promos
             }
