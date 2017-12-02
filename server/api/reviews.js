@@ -1,11 +1,10 @@
 const express = require('express');
 const Review = require('../db/models/Review');
 const Venue = require('../db/models/Venue');
-// const { Venue } = db;
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    Review.findAll()
+router.get('/:barId', (req, res, next) => {
+    Review.findAll({ where: { venueId: req.params.barId } })
         .then(reviews => {
             res.send(reviews);
         })
