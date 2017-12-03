@@ -4,8 +4,10 @@ const Venue = require('../db/models/Venue');
 const router = express.Router();
 
 router.get('/:barId', (req, res, next) => {
+    console.log('barId', req.params.barId)
     Review.findAll({ where: { venueId: req.params.barId } })
         .then(reviews => {
+            console.log('reviews', reviews)
             res.send(reviews);
         })
 })
