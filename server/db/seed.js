@@ -44,8 +44,7 @@ const seed = () => {
       Genre.create({ name: 'Classic Rock'}),
       Genre.create({ name: '70\'s'}),
       Genre.create({ name: '80\'s'}),
-      Genre.create({ name: '90\'s'}),
-      Genre.create({ name: 'Chill'})
+      Genre.create({ name: '90\'s'})
     ])
     .then((_genres) => {
       genres = _genres;
