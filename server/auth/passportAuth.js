@@ -11,7 +11,6 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    console.log(req.body);
     User.create({
         email: req.body.email,
         password: req.body.password
@@ -60,7 +59,7 @@ router.get('/spotify/callback', passport.authenticate('spotify', { failureRedire
                 track.song = song.track.name;
                 songs.push(track);
             })
-                res.redirect(`exp://p8-8fk.jdb409.djrc-native.exp.direct:80/+token=${token}`);
+                res.redirect(`exp://exp.host/@jdb409/Capstone/+token=${token}`);
             }).catch(err => {
                 console.log(err)
             })
