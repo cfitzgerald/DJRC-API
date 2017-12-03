@@ -11,6 +11,29 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
+router.get('/:venueId', (req, res, next) => {
+
+  Promo.findAll({
+    where: {
+      venueId: req.params.venueId
+    }
+  })
+  .then(promos => {
+    console.log(promos, 'promos in api');
+    res.send(promos)
+  })
+  .catch(console.log('venueId error'))
+});
+
+router.delete('/:id', (req, res, next) => {
+  Promo.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(() => res.sendStatus(200))
+})
+
 router.post('/:id', (req, res, next) => {
   let promo;
   let curPromos = [];

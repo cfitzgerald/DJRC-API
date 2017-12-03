@@ -27,6 +27,7 @@ router.get('/', (req, res, next) => {
       }
       bars = bars.map(bar => {
 
+
         return bar.getUser()
           .then(user => {
             let genres = [];
@@ -80,9 +81,12 @@ router.get('/owner/:id', (req, res, next) => {
   Venue.findOne({
     where: {
       userId: req.params.id
-    }
+    },
+    include: [{all: true}]
   })
-    .then(venue => res.send(venue))
+    .then(venue => {
+      res.send(venue)
+    })
     .catch(next);
 })
 
