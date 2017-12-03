@@ -57,15 +57,17 @@ const seed = () => {
         createPassword('Jon'),
         createPassword('Colin'),
         createPassword('Rav'),
+        createPassword('djrc-api')
       ]);
     })
-    .then(([passD, passJ, passC, passR]) => {
+    .then(([passD, passJ, passC, passR, passAdmin]) => {
       //User Creation
       return Promise.all([
         User.create({firstName: 'Dan', lastName: 'Weissbard', email: 'Dan@dan.com', password: passD, isBusiness: false, gender: 'male'}),
         User.create({firstName: 'Jon', lastName: 'Brandwein', email: 'Jon@jon.com', password: passJ, isBusiness: false, gender: 'male'}),
         User.create({firstName: 'Colin', lastName: 'FitzGerald', email: 'Colin@colin.com', password: passC, isBusiness: false, gender: 'male'}),
-        User.create({firstName: 'Ravette', lastName: 'Rawow', email: 'Rav@rav.com', password: passR, isBusiness: false, gender: 'female'})
+        User.create({firstName: 'Ravette', lastName: 'Rawow', email: 'Rav@rav.com', password: passR, isBusiness: false, gender: 'female'}),
+        User.create({firstName: 'Admin', lastName: 'Admin', email: 'barcastNYC@gmail.com', password: passAdmin, isBusiness: false, gender: 'male'})
       ]);
     })
     .then(() => {
