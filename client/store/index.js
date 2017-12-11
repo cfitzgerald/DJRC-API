@@ -10,12 +10,12 @@ import users from './users';
 import venues from './venues';
 
 const rootReducer = combineReducers({
-  authUser,
-  error,
-  // genres,
-  // promos,
-  users,
-  venues,
+    authUser,
+    error,
+    // genres,
+    // promos,
+    users,
+    venues,
 });
 
 export default createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));

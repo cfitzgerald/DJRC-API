@@ -8,30 +8,28 @@ import Spotify from './Spotify';
 import WebAdmin from './WebAdmin';
 
 class Main extends Component {
-
-  render() {
-    return (
-      <div className="container-fluid">
-
-        <Switch>
-          <Route exact path="/" component={ Landing } />
-          <Route exact path="/spotify" component={Spotify} />
-          <Route exact path="/admin" component={WebAdmin} />
-          <Redirect to="/" />
-        </Switch>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="container-fluid">
+                <Switch>
+                    <Route exact path="/" component={ Landing } />
+                    <Route exact path="/spotify" component={Spotify} />
+                    <Route exact path="/admin" component={WebAdmin} />
+                    <Redirect to="/" />
+                </Switch>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = () => {
-  return {
-  };
+    return {
+    };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
+const mapDispatchToProps = () => {
+    return {
+    };
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
