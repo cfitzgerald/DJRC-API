@@ -6,42 +6,44 @@ const GET_VENUES = 'GET_VENUES';
 
 // ACTION CREATOR(s)
 export function getVenues(venues) {
-  return { type: GET_VENUES, venues };
+    return {
+        type: GET_VENUES,
+        venues
+    };
 }
 
 // THUNK CREATOR(s)
 export function fetchVenues() {
-  return (dispatch) => {
-    return axios.get('/api/venues')
-      .then(res => res.data)
-      .then(venues => {
-        dispatch(getVenues(venues));
-      })
-      .catch(err => dispatch(setError(err.response.data)));
-  };
+    return (dispatch) => {
+        return axios.get('/api/venues')
+            .then(res => res.data)
+            .then(venues => {
+                dispatch(getVenues(venues));
+            })
+            .catch(err => dispatch(setError(err.response.data)));
+    };
 }
 
-export function updateOwner (venueId, userId) {
-    return axios.put(`/api/venues/owner/${venueId}`,  { userId } )
-    .then(res => res.data)
-    // .then(() => dispatch(fetchVenues()))
+export function updateOwner(venueId, userId) {
+    return axios.put(`/api/venues/owner/${venueId}`, {
+            userId
+        })
+        .then(res => res.data);
+        // .then(() => dispatch(fetchVenues()))
 }
 
-
-
-
-export function getOwner(userId){
-  return axios.get(`/api/venues/owner/${userId}`)
-  .then(res => res.data)
+export function getOwner(userId) {
+    return axios.get(`/api/venues/owner/${userId}`)
+        .then(res => res.data);
 }
 
 export function deleteVenue(id) {
-  return (dispatch) => {
-    return axios.delete(`api/venues/${id}`)
-    .then(() => {
-      dispatch(fetchVenues());
-    });
-  };
+    return (dispatch) => {
+        return axios.delete(`api/venues/${id}`)
+            .then(() => {
+                dispatch(fetchVenues());
+            });
+    };
 }
 
 // export function updateVenue(venue, history) {
@@ -55,10 +57,10 @@ export function deleteVenue(id) {
 
 // REDUCER(s)
 export default function reducer(state = [], action) {
-  switch (action.type){
-    case GET_VENUES:
-      return action.venues;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case GET_VENUES:
+            return action.venues;
+        default:
+            return state;
+    }
 }

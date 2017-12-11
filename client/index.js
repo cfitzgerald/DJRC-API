@@ -6,10 +6,10 @@ import store from './store';
 import Main from './components/Main';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Main />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <Router>
+            <Main />
+        </Router>
+    </Provider>,
+    document.getElementById('root')
 );
