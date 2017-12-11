@@ -1,32 +1,36 @@
 const router = require('express').Router();
 const db = require('../db/models');
-const {Genre} = db.models;
-
-module.exports = router;
+const { Genre } = db.models;
 
 router.get('/', (req, res, next) => {
-  Genre.findAll()
-    .then(genres => res.send(genres))
-    .catch(er => next(er));
+    Genre.findAll()
+        .then(genres => res.send(genres))
+        .catch(er => next(er));
 });
 
 router.get('/:id', (req, res, next) => {
-  Genre.findById(req.params.id)
-    .then(genre => res.send(genre))
-    .catch(er => next(er));
+    Genre.findById(req.params.id)
+        .then(genre => res.send(genre))
+        .catch(er => next(er));
 });
 
 router.post('/', (req, res, next) => {
-  Genre.create(req.body)
-    .then(genre => res.send(genre))
-    .catch(er => next(er));
+    Genre.create(req.body)
+        .then(genre => res.send(genre))
+        .catch(er => next(er));
 });
 
 router.delete('/:id', (req, res, next) => {
-  Genre.destroy({ where: { id: req.params.id } })
-    .then(genre => {
-      return Genre.findAll()
-        .then(genres => res.send(genres))
-    })
-    .catch(er => next(er));
+    Genre.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(genre => {
+            return Genre.findAll()
+                .then(genres => res.send(genres));
+        })
+        .catch(er => next(er));
 });
+
+module.exports = router;

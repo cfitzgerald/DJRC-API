@@ -32,31 +32,28 @@ const Venue = db.define('venue', {
     }
 });
 
-Venue.updateOwner = function(venueId, userId){
+Venue.updateOwner = function(venueId, userId) {
     Venue.findById(venueId)
-    .then((venue) => {
-
-        venue.setUser(userId)
-        return venue.save()
-    })
-    .then(() => {
-        User.findById(userId)
-        .then((user) => {
-            // user.setVenue(venueId);
-            user.isBusiness = true;
-            return user.save();
+        .then((venue) => {
+            venue.setUser(userId);
+            return venue.save();
         })
+        .then(() => {
+            User.findById(userId)
+                .then((user) => {
+                    // user.setVenue(venueId);
+                    user.isBusiness = true;
+                    return user.save();
+                });
+        });
+};
 
-    })
-}
-
-Venue.updateGenres = function(venueId, genreArr){
+Venue.updateGenres = function(venueId, genreArr) {
     Venue.findById(venueId)
         .then((venue) => {
             venue.setGenres(genreArr);
             return venue.save();
-        })
-}
-
+        });
+};
 
 module.exports = Venue;
