@@ -5,6 +5,8 @@ const { User, Song } = db.models;
 const getSongs = (data, bar) => {
     if (!data) return bar;
     const songs = [];
+
+    //Add songs to database
     data.body.items.forEach(song => {
         const track = {};
         track.artist = song.track.artists[0].name;
@@ -17,6 +19,7 @@ const getSongs = (data, bar) => {
                 }
             })
             .then(song => {
+                //Only want to create a new entry if the song and userId are different
                 if (song) return;
                 Song.create({
                     artist: track.artist,
