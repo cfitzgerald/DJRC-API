@@ -14,6 +14,7 @@ const jwtOptions = {
     secretOrKey: process.env.JWT_SECRET
 };
 
+//Authenticate using user entered email and password
 passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -30,7 +31,7 @@ passport.use(new LocalStrategy({
                     done(null, false);
                 }
                 if (user) {
-                    //for some reason user.validate password wasn't working
+                    //compare typed password with encrypted one in database
                     bcrypt.compare(password, user.password)
                         .then(res => {
                             if (!res) {
@@ -50,9 +51,11 @@ passport.use(new LocalStrategy({
     }
 ));
 
+//Check if JWT sent with request is valid
 passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
     const id = payload.spotifyId ? 'spotifyId' : 'id';
     const load = payload.spotifyId ? payload.spotifyId : payload.id;
+
     User.findOne({
             where: {
                 id: load
@@ -73,6 +76,7 @@ passport.use('jwt', new JwtStrategy(jwtOptions, (payload, done) => {
         });
 }));
 
+//Log user in using spotify oAuth
 passport.use(new SpotifyStrategy({
     clientID: process.env.SPOTIFY_CLIENTID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -90,6 +94,7 @@ passport.use(new SpotifyStrategy({
                 });
         })
         .then(user => {
+            //add fields necessary to persist user
             user.email = profile._json.email;
             user.spotifyAccessToken = accessToken;
             user.spotifyRefreshToken = refreshToken;
