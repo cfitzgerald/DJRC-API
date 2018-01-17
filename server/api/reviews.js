@@ -17,6 +17,10 @@ router.get('/:barId', (req, res, next) => {
 router.post('/:barId', (req, res, next) => {
     Review.create(req.body)
         .then(review => {
+
+            //Find correct bar and get all 
+            // reviews of that bar to calculate new rating
+            
             return Promise.all([Review.findAll({
                     where: {
                         venueId: req.params.barId

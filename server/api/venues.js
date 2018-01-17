@@ -7,20 +7,26 @@ router.get('/', (req, res, next) => {
     let { latitude, longitude, radius } = req.query;
     latitude *= 1;
     longitude *= 1;
+
+    //only show bars within small radius of clients location    
     radius *= 1;
     radius = radius ? radius : 0.008;
+
     Venue.findAll({
             include: [{
                 all: true
             }]
         })
         .then(bars => {
+            //update users location
             if (latitude && longitude) {
                 bars = bars.filter(bar => {
                     return latitude - radius < bar.lat && latitude + radius > bar.lat && longitude - radius < bar.lon && longitude + radius > bar.lon;
                 });
             }
             bars = bars.map(bar => {
+
+                //create bar object for client to use on map
                 return bar.getUser()
                     .then(user => {
                         let genres = [];
@@ -51,6 +57,7 @@ router.get('/', (req, res, next) => {
             return Promise.all(bars);
         })
         .then(bars => {
+            //attach bars songs from spotify
             bars = bars.map(bar => {
                 return getSongsFromSpotify(bar);
             });
